@@ -58,8 +58,8 @@ test('v1.2 contextual CTAs and keyboard breakdowns',async({page,browser})=>{
  await page.goto('/');await expect(page.locator('.game-chapter')).toHaveCount(2);
  await expect(page.getByRole('link',{name:'Wishlist on Steam'})).toHaveAttribute('href','https://store.steampowered.com/app/4107020/Jigsaw_Jab/');
  await page.getByRole('link',{name:'Read the design breakdown'}).click();await expect(page).toHaveURL(/jigsaw-jab\/#design-breakdown/);
- const summary=page.locator('summary').first();await summary.focus();await page.keyboard.press('Enter');
- await expect(page.locator('details').first()).toHaveAttribute('open','');await page.keyboard.press('Space');await expect(page.locator('details').first()).not.toHaveAttribute('open','');
+ const breakdown=page.locator('#design-breakdown details').first();const summary=breakdown.locator('summary');await summary.focus();await page.keyboard.press('Enter');
+ await expect(breakdown).toHaveAttribute('open','');await page.keyboard.press('Space');await expect(breakdown).not.toHaveAttribute('open','');
  const context=await browser.newContext({javaScriptEnabled:false});const p=await context.newPage();await p.goto('http://127.0.0.1:4321/work/snowballing/');
  await p.locator('summary').first().click();await expect(p.locator('details').first()).toHaveAttribute('open','');await expect(p.getByRole('link',{name:'Watch Snowballing gameplay'})).toBeVisible();await context.close();
 });
