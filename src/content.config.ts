@@ -1,4 +1,5 @@
 import { defineCollection } from 'astro:content';
+// Schemas include reusable media galleries and documented system flows.
 import { glob } from 'astro/loaders';
 import { projectSchema, mechanicSchema } from './lib/schemas';
 export const collections = {

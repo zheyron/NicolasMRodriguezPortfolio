@@ -1,11 +1,28 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';import ProjectCard from '../components/ProjectCard.astro';import MechanicCard from '../components/MechanicCard.astro';import {content} from '../lib/content';import {featuredItems} from '../lib/contracts';import {withBase} from '../lib/paths';
-const {projects,mechanics}=await content();const featured=featuredItems(projects);const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import MechanicCard from '../components/MechanicCard.astro';
+import Cover from '../components/Cover.astro';
+import {content} from '../lib/content';
+import {featuredItems} from '../lib/contracts';
+import {withBase} from '../lib/paths';
+import {home} from '../data/home';
+const {projects,mechanics}=await content();
+const spotlight=projects.find(p=>p.id===home.spotlightId)!;
+const featured=featuredItems(projects).filter(p=>p.id!==spotlight.id);
+const studies=mechanics.filter(m=>m.data.parentProject===spotlight.id);
+const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
 ---
-<BaseLayout title="Home"><div class="shell">
-<section class="hero"><div class="eyebrow"><span class="tiny-dot"></span>Independent & academic games</div><h1>Game Producer<br/><span class="hero-secondary">& Game Designer<span class="accent">.</span></span></h1><div class="hero-bottom"><p>I direct and produce games, design their systems,<br class="desktop-break"/> and help build the mechanics that make them work.</p><div class="actions"><a class="button primary" href={url('/work/')}>Explore my work <span aria-hidden="true">↗</span></a><a class="text-link" href={url('/contact/')}>Get in touch ↗</a></div></div></section>
-<section class="section" aria-labelledby="selected"><div class="section-heading"><div><p class="eyebrow">01 / Selected work</p><h2 id="selected">From an idea to something playable.</h2></div><a class="text-link" href={url('/work/')}>All projects <span aria-hidden="true">→</span></a></div><div class="project-grid featured-grid">{featured.map((item,i)=><ProjectCard item={item} index={i+1}/>)}</div></section>
-<section class="section" aria-labelledby="systems"><div class="section-heading"><div><p class="eyebrow">02 / A closer look</p><h2 id="systems">Mechanics & systems.</h2></div><a class="text-link" href={url('/mechanics/')}>Explore mechanics →</a></div><p class="section-intro">The rules, implementation, and iteration behind the games.</p><div class="mechanic-grid">{mechanics.slice(0,2).map(item=><MechanicCard item={item} parentTitle={projects.find(p=>p.id===item.data.parentProject)?.data.title}/>)}</div></section>
-<section class="section approach"><div><p class="eyebrow">03 / How I work</p><h2>Creative direction.<br/>Hands-on execution.</h2><a class="text-link" href={url('/about/')}>More about me →</a></div><div><p class="large-copy">My work connects production, game design, and implementation across indie and academic projects.</p><p>From gameplay systems in Godot and Unity to VFX in Unreal Engine, I work across disciplines while keeping individual contributions clear.</p><div class="approach-links"><a href={url('/work/jigsaw-jab/')}>Direction & production <span>Jigsaw Jab ↗</span></a><a href={url('/work/snowballing/')}>Systems & programming <span>Snowballing ↗</span></a><a href={url('/work/kenshi-mods/')}>Modding & community <span>Kenshi ↗</span></a></div></div></section>
-<section class="contact-band"><p class="eyebrow">Let’s connect</p><h2>Have a game in mind?</h2><a class="button primary" href={url('/contact/')}>Start a conversation ↗</a></section>
+<BaseLayout title="Home"><div class="shell home-shell">
+  <header class="home-intro">
+    <div><p class="intro-name">Nicolás Rodríguez <span aria-hidden="true">/</span></p><h1>Game Producer<br/>& Game Designer<span class="accent">.</span></h1></div>
+    <div class="intro-note"><p>{home.intro}</p><span>{home.detail}</span><a class="text-link" href={url('/about/')}>A little about me <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <section class="spotlight" aria-labelledby="spotlight-title">
+    <a class="spotlight-art" href={url(`/work/${spotlight.id}/`)} aria-label={`Explore ${spotlight.data.title}`}><Cover title={spotlight.data.title!} cover={spotlight.data.cover} eager/></a>
+    <div class="spotlight-copy"><p class="eyebrow">{home.spotlightLabel} <span class="mini-line"></span> {spotlight.data.technologies.join(' · ')}</p><p class="spotlight-game">{spotlight.data.title}</p><h2 id="spotlight-title">{home.spotlightTitle}</h2><p>{home.spotlightDescription}</p><div class="actions"><a class="button primary" href={url(`/work/${spotlight.id}/`)}>Explore the project <span aria-hidden="true">↗</span></a><a class="text-link" href={spotlight.data.links[0].url}>Play on itch.io ↗</a></div></div>
+  </section>
+  <section class="section selected-work" aria-labelledby="selected"><div class="section-heading"><div><p class="eyebrow">Selected work</p><h2 id="selected">More worlds I’ve worked on.</h2></div><a class="text-link" href={url('/work/')}>All projects <span aria-hidden="true">↗</span></a></div><div class="project-grid">{featured.map((item,i)=><ProjectCard item={item} index={i+1}/>)}</div></section>
+  <section class="section home-studies" aria-labelledby="systems"><div class="section-heading"><div><p class="eyebrow">Inside {spotlight.data.title}</p><h2 id="systems">The systems behind the snow.</h2></div><a class="text-link" href={url('/mechanics/')}>All mechanics <span aria-hidden="true">↗</span></a></div><div class="mechanic-grid">{studies.map(item=><MechanicCard item={item} parentTitle={spotlight.data.title}/>)}</div></section>
+  <section class="closing-note"><div><p class="eyebrow">Let’s make something playable.</p><h2>Good games begin<br/>with a conversation.</h2></div><a class="button primary" href={url('/contact/')}>Get in touch <span aria-hidden="true">↗</span></a></section>
 </div></BaseLayout>

@@ -4,7 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import {site} from '../data/site';
 import {withBase} from '../lib/paths';
 import '../styles/global.css';
-interface Props {title:string;description?:string;noindex?:boolean}
+interface Props {title:string;description?:string;noindex?:boolean;socialImage?:{src:string;alt:string;width:number;height:number}}
 const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
 ---
 <!doctype html><html lang="en"><head><SeoHead {...Astro.props}/></head><body>

@@ -74,7 +74,7 @@ Long narrative belongs below the frontmatter. Keep unknown dates, engines, team 
 
 ## Featured projects
 
-Set `featured: true` and `featuredOrder` to control Home. The main catalogue continues to use `sortOrder`. Three projects are currently selected. Fewer strong entries are preferable to filler.
+Set `featured: true` and `featuredOrder` to control Home. `src/data/home.ts` selects the main spotlight and its editorial copy; that project is excluded from the secondary featured grid to avoid duplication. The main catalogue continues to use `sortOrder`. Three projects are currently selected. Fewer strong entries are preferable to filler.
 
 ## Add a mechanic
 
@@ -84,7 +84,7 @@ A `case-study` requires real evidence, `problem`, `intent`, `designSummary`, `it
 
 ## Covers, evidence and videos
 
-The initial release uses original CSS typography as covers, not simulated gameplay. The original typographic Open Graph image and favicon are owned site graphics. No external portfolio assets were copied.
+Snowballing now uses original project artwork and real local-build captures. Jigsaw Jab and Martial Village use their official public cover images. Remaining projects use original CSS typography, not simulated gameplay. No reference-portfolio assets were copied. See the media manifest in `docs/content-audit.md` for capture conditions and provenance.
 
 For a real cover, add an **approved, already optimized** image under `public/media/<slug>/` and set:
 
@@ -100,6 +100,8 @@ cover:
 ```
 
 Use 16:9 covers, WebP/AVIF where appropriate, explicit dimensions and small files. Card images load lazily; detail hero media loads eagerly. Put contextual visual evidence in `evidence[].image` with the same fields. Record the license or team permission in the media manifest before adding files.
+
+Use optional `pixelArt: true` for pixel-art media. `gallery` accepts an array of the same media objects, renders readable captions, and links to full images. Captions must identify controlled test conditions when applicable. Project pages can add `tagline`, `summary`, and `contributions` entries with `title` and `description`. Mechanics can add `flow` steps with `label` and `detail`; these produce an accessible, responsive system diagram. Project and mechanic covers are also used for their Open Graph previews.
 
 `video` accepts a public HTTPS `url`, a descriptive `label`, and an optional approved `poster`. The component links out only after a click, so no iframe or video is loaded automatically. Provide captions on the hosted video. No CV button is shown until there is a verified file and a deliberate link.
 

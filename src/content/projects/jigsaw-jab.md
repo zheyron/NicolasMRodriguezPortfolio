@@ -54,7 +54,17 @@
       "reviewStatus": "approved"
     }
   ],
-  "team": "Fuenteki"
+  "team": "Fuenteki",
+  "cover": {
+    "src": "/media/jigsaw-jab/cover.webp",
+    "width": 920,
+    "height": 430,
+    "alt": "Official Jigsaw Jab artwork with its logo, characters, and a fist above the arena.",
+    "caption": "Official Jigsaw Jab artwork selected for this portfolio.",
+    "credit": "Jigsaw Jab project artwork",
+    "permission": "approved",
+    "pixelArt": true
+  }
 }
 ---
 

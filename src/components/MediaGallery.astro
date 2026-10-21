@@ -1,0 +1,15 @@
+---
+import {withBase} from '../lib/paths';
+interface Props {items:Array<{src:string;alt:string;width:number;height:number;caption:string;credit:string;pixelArt?:boolean}>;title?:string;}
+const {items,title='In the game'}=Astro.props;
+---
+{items.length>0&&<section class="media-section" aria-label={title}>
+  <div class="section-heading"><h2>{title}</h2><p>Open an image for a closer look.</p></div>
+  <div class="media-gallery">{items.map((item,index)=><figure>
+    <a class:list={['media-zoom',{'pixel-art':item.pixelArt}]} href={withBase(item.src,import.meta.env.BASE_URL)}>
+      <img src={withBase(item.src,import.meta.env.BASE_URL)} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async"/>
+      <span class="image-open" aria-hidden="true">View image ↗</span>
+    </a>
+    <figcaption><span class="figure-number">{String(index+1).padStart(2,'0')}</span>{item.caption}</figcaption>
+  </figure>)}</div>
+</section>}

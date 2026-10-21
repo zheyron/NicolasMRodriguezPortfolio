@@ -51,7 +51,17 @@
       "reviewStatus": "approved"
     }
   ],
-  "credits": []
+  "credits": [],
+  "cover": {
+    "src": "/media/kenshi-mods/cover.webp",
+    "width": 512,
+    "height": 289,
+    "alt": "Martial Village at night, with a large statue and village buildings.",
+    "caption": "Project preview from the Martial Village Steam Workshop listing.",
+    "credit": "Martial Village / Kenshi",
+    "permission": "approved",
+    "pixelArt": false
+  }
 }
 ---
 

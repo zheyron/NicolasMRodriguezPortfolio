@@ -1,5 +1,18 @@
 import {test,expect} from '@playwright/test';import AxeBuilder from '@axe-core/playwright';
-const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/work/pillarfall/','/404.html'];
+const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/work/pillarfall/','/404.html'];
+test('real media loads with correct dimensions and gallery links work',async({page})=>{
+  for(const route of ['/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-health-feedback/']){
+    await page.goto(route);
+    for(const img of await page.locator('img').all()){
+      await img.scrollIntoViewIfNeeded();
+      await expect.poll(()=>img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+      expect(await img.evaluate(el=>{const i=el as HTMLImageElement;return i.naturalWidth===Number(i.getAttribute('width'))&&i.naturalHeight===Number(i.getAttribute('height'));})).toBe(true);
+    }
+  }
+  const first=page.locator('.media-zoom').first();const href=await first.getAttribute('href');
+  await first.click();await expect(page).toHaveURL(new RegExp(href!.replaceAll('.','\\.')));
+  await page.goBack();await expect(page.locator('h1')).toContainText('Making health');
+});
 for(const width of [360,390,768,1280,1920]) test(`responsive and navigation at ${width}px`,async({page})=>{await page.setViewportSize({width,height:900});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));for(const route of routes){await page.goto(route);await expect(page.locator('h1')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);if(width<768){await page.getByRole('button',{name:/Menu/}).click();await expect(page.getByRole('navigation',{name:'Main navigation'})).toBeVisible();await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:/Menu/})).toBeFocused();} }expect(errors).toEqual([]);});
-for(const route of ['/','/work/','/mechanics/','/work/snowballing/','/mechanics/snowballing-progression/','/contact/'])test(`WCAG audit ${route}`,async({page})=>{await page.goto(route);const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();expect(result.violations).toEqual([]);});
+for(const route of ['/','/work/','/mechanics/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/contact/'])test(`WCAG audit ${route}`,async({page})=>{await page.goto(route);const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();expect(result.violations).toEqual([]);});
 test('keyboard, crosslinks and no-JS navigation',async({page,browser})=>{await page.goto('/');await page.keyboard.press('Tab');await expect(page.getByText('Skip to content')).toBeFocused();await page.keyboard.press('Enter');await expect(page.locator('main')).toBeFocused();await page.goto('/work/snowballing/');await page.getByRole('link',{name:/progression between runs/i}).click();await expect(page).toHaveURL(/mechanics\/snowballing-progression/);await page.getByRole('link',{name:/Part of Snowballing/}).click();await expect(page).toHaveURL(/work\/snowballing/);const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const p=await context.newPage();await p.goto('http://127.0.0.1:4321/');await p.getByRole('navigation',{name:'Main navigation'}).getByRole('link',{name:'Work',exact:true}).click();await expect(p.locator('h1')).toContainText('Games');await context.close();});
