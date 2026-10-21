@@ -31,6 +31,6 @@ Gingaten is a Unity project through which I explored AI techniques and game desi
 
 ## Scope of this overview
 
-This is an introduction to the project’s focus, not a technical breakdown. It does not name specific AI patterns, reconstruct an architecture, or claim measured player outcomes.
+The project explores AI techniques and game design patterns in Unity.
 
 The project page provides the broader context and my role.

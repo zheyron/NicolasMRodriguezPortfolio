@@ -11,7 +11,7 @@
   "claims": [
     {
       "id": "authorship",
-      "text": "I designed and implemented the system described here. Authorship is confirmed by my account; behaviour was checked against the local project and the captures.",
+      "text": "I designed and implemented the system described here.",
       "sourceType": "author",
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
@@ -29,7 +29,7 @@
     "width": 640,
     "height": 360,
     "alt": "Enemies converge on Snowy as a red vignette signals incoming damage.",
-    "caption": "Damage feedback in the running local build: a red screen-edge flash and the player’s health bar.",
+    "caption": "Damage feedback: a red screen-edge flash and the player’s health bar.",
     "credit": "Snowballing project material",
     "permission": "approved",
     "pixelArt": true
@@ -60,7 +60,7 @@
       "width": 640,
       "height": 360,
       "alt": "Enemies converge on Snowy as a red vignette signals incoming damage.",
-      "caption": "Damage feedback in the running local build: a red screen-edge flash and the player’s health bar.",
+      "caption": "Damage feedback: a red screen-edge flash and the player’s health bar.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -86,11 +86,11 @@
   "implementationSummary": "The regeneration handler reads the owned persistent upgrade count and only heals when the player has the upgrade and is below maximum health. The flash component replaces an active tween before starting another, preventing overlapping healing tweens. The damage timer creates an interval between contact-damage ticks.",
   "iterations": [
     "The v0.3.0 public notes credit my health-regeneration and regeneration-flash work.",
-    "The capture sets health to 5/10 and invokes the actual regeneration handler with one purchased level. The resulting frame shows 6/10 health and the green flash."
+    "With one regeneration level, a healing event takes health from 5/10 to 6/10 and triggers a green flash."
   ],
   "outcomes": [
-    "The controlled run demonstrates a successful healing event with synchronized health and visual feedback. A separate frame shows contact damage and the red vignette.",
-    "These captures document behaviour. They are not evidence of measured improvements in readability or playtest performance."
+    "Healing synchronizes the health display and green flash. Contact damage triggers the red vignette.",
+    "Damage and healing use distinct visual cues alongside the health bar."
   ],
   "evidence": [
     {

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DecisionSummary from '../../components/DecisionSummary.astro';
 import MediaLoop from '../../components/MediaLoop.astro';
 import StoreCTA from '../../components/StoreCTA.astro';
+import SteamPanel from '../../components/SteamPanel.astro';
 import Cover from '../../components/Cover.astro';
 import EvidenceList from '../../components/EvidenceList.astro';
 import VideoPoster from '../../components/VideoPoster.astro';
@@ -34,6 +35,7 @@ const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
   {related.length>0&&<section id="studies" class="section"><div class="section-heading"><div><p class="eyebrow">Design & implementation</p><h2>Inside this project</h2></div><p>Explore the systems in detail.</p></div><div class="mechanic-grid">{related.map(m=><MechanicCard item={m} parentTitle={d.title}/>)}</div></section>}
   {d.loop&&<section id="gameplay" class="project-loop"><h2>Gameplay</h2><MediaLoop media={d.loop}/></section>}
   <MediaGallery items={d.gallery}/>
+  {d.externalLinks.filter(l=>l.kind==='wishlist_steam').map(l=><SteamPanel url={l.url} title={d.title!}/>)}
   <div class="reading"><div class="prose"><Content/></div>{d.breakdowns.length>0&&<section id="design-breakdown" class="article-section"><h2>Design breakdown</h2>{d.breakdowns.map(item=><DecisionSummary item={item}/>)}</section>}{([ ["Challenges",d.challenges],["Production",d.production],["Iteration",d.iterations],["Results",d.outcomes],["Learnings",d.learnings] ] as const).map(([title,items])=>items.length>0&&<section class="article-section"><h2>{title}</h2>{items.map(text=><p>{text}</p>)}</section>)}{d.team&&<section class="article-section"><h2>Project credits</h2><p>{d.team}. This page documents my individual contribution.</p></section>}{d.decisions.length>0&&<section class="article-section"><h2>Key decisions</h2>{d.decisions.map(dec=><article class="decision"><h3>{dec.title}</h3><p>{dec.problem}</p><p>{dec.action}</p>{dec.rationale&&<p>{dec.rationale}</p>}{dec.outcome&&<p>{dec.outcome}</p>}<div>{dec.evidenceIds.map(id=><a class="text-link" href={`#evidence-${id}`}>View evidence →</a>)}</div></article>)}</section>}{d.video&&<VideoPoster video={d.video}/>}<EvidenceList items={d.evidence} compactMedia={d.gallery.length>0}/></div>
   <nav class="detail-end" aria-label="More work"><a href={url('/work/')}>← All projects</a><a href={url(`/work/${next.id}/`)}>Next: {next.data.title} →</a><a href={url('/contact/')}>Get in touch ↗</a></nav>
 </div></BaseLayout>

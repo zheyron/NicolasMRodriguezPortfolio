@@ -34,4 +34,4 @@ Ceiba Spaciosa is a 3D experience made in Unreal Engine 5. My contributions comb
 
 ## My contribution
 
-I worked on landscaping tools and materials, as well as inventory and player systems. This summary reflects my account of the work; it does not claim a public release or measured result.
+I worked on landscaping tools and materials, as well as inventory and player systems.

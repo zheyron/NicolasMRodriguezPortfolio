@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';import AxeBuilder from '@axe-core/playwright';
-const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/work/pillarfall/','/404.html'];
+const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/work/pillarfall/','/work/jigsaw-jab/','/work/tempus-vitae/','/mechanics/jigsaw-jab-combat-puzzle/','/404.html'];
 test('real media loads with correct dimensions and gallery links work',async({page})=>{
   for(const route of ['/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-health-feedback/']){
     await page.goto(route);
@@ -30,28 +30,28 @@ test('v1.2 scroll layers reverse and preserve layout',async({page})=>{
 test('v1.2 reduced motion keeps characters static and loops opt-in',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');
  await expect(page.locator('.hero-art .character-layer')).toHaveCSS('transform','none');
- const video=page.locator('video');await video.scrollIntoViewIfNeeded();
+ const video=page.locator('#snowballing video');await video.scrollIntoViewIfNeeded();
  expect(await video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
  expect(await video.getAttribute('src')).toBeNull();
- await page.getByRole('button',{name:'Play clip: Snowballing local gameplay'}).click();
+ await page.getByRole('button',{name:'Play clip: Snowballing gameplay'}).click();
  await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(false);
  expect(await video.evaluate(v=>(v as HTMLVideoElement).muted)).toBe(true);
- await page.getByRole('button',{name:'Pause clip: Snowballing local gameplay'}).click();
+ await page.getByRole('button',{name:'Pause clip: Snowballing gameplay'}).click();
  await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
 });
 test('v1.2 gameplay lazy loads, plays silently, pauses offscreen and respects manual pause',async({page})=>{
- await page.goto('/');const video=page.locator('video');expect(await video.getAttribute('src')).toBeNull();
+ await page.goto('/');const video=page.locator('#snowballing video');expect(await video.getAttribute('src')).toBeNull();
  await video.scrollIntoViewIfNeeded();await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).currentTime)).toBeGreaterThan(0);
  expect(await video.evaluate(v=>(v as HTMLVideoElement).muted)).toBe(true);
  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
  await video.scrollIntoViewIfNeeded();await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(false);
- await page.getByRole('button',{name:'Pause clip: Snowballing local gameplay'}).click();
+ await page.getByRole('button',{name:'Pause clip: Snowballing gameplay'}).click();
  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await video.scrollIntoViewIfNeeded();
  expect(await video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
 });
 test('v1.2 save-data disables automatic video loading',async({page})=>{
  await page.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true},configurable:true}));
- await page.goto('/');const video=page.locator('video');await video.scrollIntoViewIfNeeded();
+ await page.goto('/');const video=page.locator('#snowballing video');await video.scrollIntoViewIfNeeded();
  expect(await video.getAttribute('src')).toBeNull();expect(await video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
 });
 test('v1.2 contextual CTAs and keyboard breakdowns',async({page,browser})=>{
@@ -61,5 +61,22 @@ test('v1.2 contextual CTAs and keyboard breakdowns',async({page,browser})=>{
  const summary=page.locator('summary').first();await summary.focus();await page.keyboard.press('Enter');
  await expect(page.locator('details').first()).toHaveAttribute('open','');await page.keyboard.press('Space');await expect(page.locator('details').first()).not.toHaveAttribute('open','');
  const context=await browser.newContext({javaScriptEnabled:false});const p=await context.newPage();await p.goto('http://127.0.0.1:4321/work/snowballing/');
- await p.locator('summary').first().click();await expect(p.locator('details').first()).toHaveAttribute('open','');await expect(p.getByRole('link',{name:'Watch Snowballing local gameplay'})).toBeVisible();await context.close();
+ await p.locator('summary').first().click();await expect(p.locator('details').first()).toHaveAttribute('open','');await expect(p.getByRole('link',{name:'Watch Snowballing gameplay'})).toBeVisible();await context.close();
+});
+
+test('Jigsaw gameplay, compact chapter cards, contacts and QA credit',async({page})=>{
+ await page.setViewportSize({width:1280,height:900});await page.goto('/');
+ const video=page.locator('#jigsaw-jab video');await video.scrollIntoViewIfNeeded();
+ await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).currentTime)).toBeGreaterThan(0);
+ expect(await video.evaluate(v=>(v as HTMLVideoElement).muted)).toBe(true);
+ for(const chapter of ['jigsaw-jab','snowballing']){
+  const cards=page.locator(`#${chapter} .showcase-card:not(.showcase-visual)`);
+  for(const card of await cards.all())expect(await card.evaluate(el=>el.getBoundingClientRect().height)).toBeLessThan(350);
+ }
+ await page.goto('/work/jigsaw-jab/');const frame=page.locator('iframe');await expect(frame).not.toHaveAttribute('src',/./);
+ await page.getByText('Open Steam store card',{exact:true}).focus();await page.keyboard.press('Enter');
+ await expect(frame).toHaveAttribute('src','https://store.steampowered.com/widget/4107020/');
+ await expect(page.locator('footer').getByRole('link',{name:'rodriguezbohl@gmail.com'})).toHaveAttribute('href','mailto:rodriguezbohl@gmail.com');
+ await expect(page.locator('footer').getByRole('link',{name:/LinkedIn/})).toHaveAttribute('href','https://www.linkedin.com/in/rodriguez-nic/');
+ await page.goto('/work/tempus-vitae/');await expect(page.locator('main')).toContainText('December 2024 to March 2025');await expect(page.locator('main')).toContainText('Whiteboard Games');
 });

@@ -49,4 +49,4 @@ Labyrinth Encounters is an atmospheric horror game. My involvement was a collabo
 
 ## Scope of my work
 
-This page records my QA contribution. It does not claim game design, programming, or authorship of the game, and does not treat its ratings as a result of my testing.
+I contributed testing to the game.

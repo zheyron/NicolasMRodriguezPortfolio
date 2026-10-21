@@ -1,0 +1,22 @@
+---
+interface Props {url:string;title:string;}
+const {url,title}=Astro.props;
+const appId=new URL(url).pathname.match(/^\/app\/(\d+)\//)?.[1];
+---
+{appId&&<section class="steam-panel" aria-label={`${title} on Steam`}>
+  <p class="eyebrow">Play it on Steam</p><h2>Put the pieces together.</h2>
+  <p>Try the demo, or wishlist the full game to follow its release.</p>
+  <a class="button primary" href={url}>Wishlist on Steam ↗</a>
+  <details data-steam-widget><summary>Open Steam store card</summary>
+    <iframe data-src={`https://store.steampowered.com/widget/${appId}/`} title={`${title} Steam store card`} loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <noscript><a href={url}>Visit the Steam store page ↗</a></noscript>
+  </details>
+</section>}
+<script>
+document.querySelectorAll<HTMLDetailsElement>('[data-steam-widget]').forEach(details=>{
+  details.addEventListener('toggle',()=>{
+    const frame=details.querySelector('iframe');
+    if(details.open&&frame&&!frame.hasAttribute('src'))frame.src=frame.dataset.src!;
+  });
+});
+</script>

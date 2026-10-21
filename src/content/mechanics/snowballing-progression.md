@@ -11,7 +11,7 @@
   "claims": [
     {
       "id": "authorship",
-      "text": "I designed and implemented the system described here. Authorship is confirmed by my account; behaviour was checked against the local project and the captures.",
+      "text": "I designed and implemented the system described here.",
       "sourceType": "author",
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
@@ -29,7 +29,7 @@
     "width": 640,
     "height": 360,
     "alt": "Two persistent upgrade cards with purchase buttons and a balance of 175.",
-    "caption": "Before purchase: a controlled test balance of 175 makes both upgrades available.",
+    "caption": "Before purchase: a balance of 175 makes both upgrades available.",
     "credit": "Snowballing project material",
     "permission": "approved",
     "pixelArt": true
@@ -40,7 +40,7 @@
       "width": 640,
       "height": 360,
       "alt": "Two persistent upgrade cards with purchase buttons and a balance of 175.",
-      "caption": "Before purchase: a controlled test balance of 175 makes both upgrades available.",
+      "caption": "Before purchase: a balance of 175 makes both upgrades available.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -81,23 +81,23 @@
   "iterations": [
     "The v0.2.0 public development notes document meta-progression and save/load work.",
     "The v0.3.0 notes record regeneration and interface work.",
-    "The local capture exercises the current purchase handler with a controlled balance of 175. Buying Health Regen for 150 leaves 25 and refreshes the cards."
+    "Buying Health Regen for 150 from a balance of 175 leaves 25 and refreshes the cards."
   ],
   "outcomes": [
     "The captured interface shows the complete before/after purchase state, including the owned level and disabled buttons.",
-    "The inspection confirms file-backed persistence and consumers of the saved upgrades. It does not measure player retention or long-term balance."
+    "Purchased upgrades persist between runs and feed into player regeneration and experience-drop chance."
   ],
   "evidence": [
     {
       "id": "purchase-before",
       "title": "Before purchase",
-      "description": "Both options are affordable in this controlled state.",
+      "description": "Both options are affordable with the displayed balance.",
       "image": {
         "src": "/media/snowballing/upgrades-available.webp",
         "width": 640,
         "height": 360,
         "alt": "Two persistent upgrade cards with purchase buttons and a balance of 175.",
-        "caption": "Before purchase: a controlled test balance of 175 makes both upgrades available.",
+        "caption": "Before purchase: a balance of 175 makes both upgrades available.",
         "credit": "Snowballing project material",
         "permission": "approved",
         "pixelArt": true

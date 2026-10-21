@@ -33,4 +33,4 @@ Gingaten is a Unity learning project focused on gameplay programming and game de
 
 ## My contribution
 
-I took the main gameplay programming and game design roles. The linked overview introduces that learning focus without naming algorithms that have not been verified.
+I took the main gameplay programming and game design roles.

@@ -60,7 +60,7 @@
     },
     {
       "id": "implementation-review",
-      "text": "Upgrade selection, progression, timed difficulty, health, UI and music integration were inspected in the supplied local project.",
+      "text": "I implemented upgrade selection, progression, timed difficulty, health, UI, and music integration.",
       "sourceType": "author",
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
@@ -124,7 +124,7 @@
       "width": 640,
       "height": 360,
       "alt": "Snowy at the centre of a snowy arena with the run timer and experience bar.",
-      "caption": "A local development build: Snowy, run timer, health bar, and experience display.",
+      "caption": "Snowy, the run timer, health bar, and experience display.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -134,7 +134,7 @@
       "width": 640,
       "height": 360,
       "alt": "Three in-run upgrade cards: Ice Daggers, Sword Damage, and Sword Quickness.",
-      "caption": "The real upgrade screen, triggered in a controlled local capture. The player chooses one of three options.",
+      "caption": "At level-up, the player chooses one of three upgrades.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -144,7 +144,7 @@
       "width": 640,
       "height": 360,
       "alt": "Snowballing main menu in front of a luminous portal.",
-      "caption": "Main menu captured from the local Godot project.",
+      "caption": "Snowballing’s main menu.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -159,7 +159,7 @@
         "width": 16,
         "height": 16,
         "alt": "Snowy, the snowball golem.",
-        "caption": "Original Snowy sprite from the local game project.",
+        "caption": "Snowy, the player character.",
         "credit": "Snowballing project artwork",
         "permission": "approved",
         "pixelArt": true
@@ -178,13 +178,13 @@
       "width": 640,
       "height": 360,
       "alt": "Snowy at the centre of a snowy arena with the run timer and experience bar.",
-      "caption": "Poster from the recorded local gameplay clip.",
+      "caption": "Snowy facing incoming enemies.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
     },
-    "label": "Snowballing local gameplay",
-    "caption": "Local development build. Nine-second capture with scripted movement input; gameplay and enemies run in the game.",
+    "label": "Snowballing gameplay",
+    "caption": "Snowy moves through the arena, attacking incoming enemies.",
     "credit": "Snowballing project material",
     "permission": "approved"
   },
@@ -201,7 +201,7 @@
       "id": "gameplay",
       "kind": "gameplay",
       "title": "A small golem in motion",
-      "summary": "Movement, automatic attacks, and incoming enemies in the running local build.",
+      "summary": "Movement, automatic attacks, and incoming enemies.",
       "loop": {
         "src": "/media/snowballing/gameplay-loop.mp4",
         "poster": {
@@ -209,13 +209,13 @@
           "width": 640,
           "height": 360,
           "alt": "Snowy at the centre of a snowy arena with the run timer and experience bar.",
-          "caption": "Poster from the recorded local gameplay clip.",
+          "caption": "Snowy facing incoming enemies.",
           "credit": "Snowballing project material",
           "permission": "approved",
           "pixelArt": true
         },
-        "label": "Snowballing local gameplay",
-        "caption": "Local development build. Nine-second capture with scripted movement input; gameplay and enemies run in the game.",
+        "label": "Snowballing gameplay",
+        "caption": "Snowy moves through the arena, attacking incoming enemies.",
         "credit": "Snowballing project material",
         "permission": "approved"
       },
@@ -240,7 +240,7 @@
     {
       "title": "A run continues beyond the arena",
       "summary": "In-run upgrades and persistent purchases connect two layers of progression.",
-      "details": "The local implementation stores permanent purchases separately from the current run’s selected upgrades. The progression study follows an actual purchase: 175 currency becomes 25 after buying a 150-cost regeneration upgrade. These are controlled development captures, not a balance or retention study.",
+      "details": "The game stores permanent purchases separately from the current run’s selected upgrades. The progression study follows an actual purchase: 175 currency becomes 25 after buying a 150-cost regeneration upgrade.",
       "evidenceIds": [
         "release-02"
       ]
@@ -263,4 +263,4 @@ I designed Diovus as part of the game’s overall encounter design. This page fo
 
 Health changes feed the health bar, screen vignette, damage response, and healing flash. Menus, upgrade cards, and audio transitions connect those systems to what the player sees and hears.
 
-The three studies follow these systems from their rules to the running interface. Captures come from the supplied local development build; controlled test states are identified in their captions.
+The three studies follow these systems from their rules to the running interface.

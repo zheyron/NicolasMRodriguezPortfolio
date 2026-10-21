@@ -41,4 +41,4 @@ I designed and prototyped this game as an early creative-coding exercise explori
 
 ## My contribution
 
-My role covers the game design and original prototype. The linked sketch is the original reference for the work. Specific algorithms are not described here because the sketch has not been inspected for this portfolio.
+My role covers the game design and original prototype. The linked sketch is the original reference for the work.

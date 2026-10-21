@@ -35,6 +35,23 @@
       "publicUrl": "https://store.steampowered.com/app/4107020/Jigsaw_Jab/",
       "sourceType": "public",
       "lastVerifiedAt": "2026-10-21"
+    },
+    {
+      "id": "gameplay",
+      "title": "Combat and puzzle assembly",
+      "description": "Official gameplay imagery shows the hand, puzzle board, enemies, and HUD together.",
+      "image": {
+        "src": "/media/jigsaw-jab/gameplay.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "The hand, enemies, and puzzle pieces share the Jigsaw Jab arena.",
+        "caption": "Combat and puzzle assembly share the same board.",
+        "credit": "Jigsaw Jab / Fuenteki — official Steam screenshot",
+        "permission": "approved"
+      },
+      "publicUrl": "https://store.steampowered.com/app/4107020/Jigsaw_Jab/",
+      "sourceType": "public",
+      "lastVerifiedAt": "2026-10-21"
     }
   ],
   "claims": [
@@ -88,44 +105,126 @@
       "kind": "gameplay",
       "title": "Combat meets puzzle assembly",
       "summary": "Defeat enemies, collect their pieces, and fit them into the central board while the action continues.",
-      "detailAnchor": "the-game"
+      "detailAnchor": "gameplay",
+      "loop": {
+        "src": "/media/jigsaw-jab/gameplay.mp4",
+        "poster": {
+          "src": "/media/jigsaw-jab/gameplay-poster.webp",
+          "width": 960,
+          "height": 540,
+          "alt": "Jigsaw Jab gameplay with the hand above the puzzle board.",
+          "caption": "Combat and placement in Jigsaw Jab.",
+          "credit": "Jigsaw Jab / Fuenteki — Steam trailer",
+          "permission": "approved"
+        },
+        "label": "Jigsaw Jab gameplay",
+        "caption": "Combat, pieces, and puzzle placement. Excerpt from the official Steam trailer.",
+        "credit": "Jigsaw Jab / Fuenteki",
+        "permission": "approved"
+      }
     },
     {
       "id": "design-loop",
       "kind": "design",
       "title": "Two actions, one arena",
-      "summary": "The public demo puts fighting and puzzle placement in the same space. Explore the loop and its rules.",
+      "summary": "Poke, slam, and place: the same hand switches between combat and completing the board.",
       "detailAnchor": "design-breakdown"
     },
     {
       "id": "direction",
       "kind": "production",
       "title": "From direction to implementation",
-      "summary": "My role spans game direction, production, design, programming, and VFX.",
+      "summary": "Creative direction, demo priorities, and hands-on design and development.",
       "detailAnchor": "my-contribution"
     }
   ],
   "breakdowns": [
     {
-      "title": "Combat and placement share a board",
-      "summary": "The game asks the player to alternate between defeating enemies and assembling their pieces.",
-      "details": "The public Steam description identifies precise pokes, crowd-control slams, and grabbing, rotating, and placing defeated pieces. Correct placements reward healing and progression. This describes the playable loop; it does not assert undocumented design alternatives or playtest results.",
+      "title": "One hand, two kinds of attention",
+      "summary": "Fighting creates the pieces the player needs to complete the puzzle.",
+      "details": "Precise pokes and crowd-control slams handle threats. Grabbing, rotating, and placing pieces moves the puzzle forward. Both activities occupy the same arena, so the player switches between immediate threats and the next useful placement.",
       "evidenceIds": [
-        "steam"
+        "steam",
+        "gameplay"
+      ]
+    },
+    {
+      "title": "Placement feeds back into survival",
+      "summary": "A correct fit rewards more than progress on the board.",
+      "details": "Correct placements restore health and advance the puzzle. That gives assembly a direct place in the combat loop: the pieces left by enemies become a resource the player must handle, not just collect.",
+      "evidenceIds": [
+        "steam",
+        "gameplay"
       ]
     }
+  ],
+  "context": "indie",
+  "loop": {
+    "src": "/media/jigsaw-jab/gameplay.mp4",
+    "poster": {
+      "src": "/media/jigsaw-jab/gameplay-poster.webp",
+      "width": 960,
+      "height": 540,
+      "alt": "Jigsaw Jab gameplay with the hand above the puzzle board.",
+      "caption": "Combat and placement in Jigsaw Jab.",
+      "credit": "Jigsaw Jab / Fuenteki — Steam trailer",
+      "permission": "approved"
+    },
+    "label": "Jigsaw Jab gameplay",
+    "caption": "Combat, pieces, and puzzle placement. Excerpt from the official Steam trailer.",
+    "credit": "Jigsaw Jab / Fuenteki",
+    "permission": "approved"
+  },
+  "gallery": [
+    {
+      "src": "/media/jigsaw-jab/gameplay.webp",
+      "width": 1280,
+      "height": 720,
+      "alt": "The hand, enemies, and puzzle pieces share the Jigsaw Jab arena.",
+      "caption": "Combat and puzzle assembly share the same board.",
+      "credit": "Jigsaw Jab / Fuenteki — official Steam screenshot",
+      "permission": "approved"
+    }
+  ],
+  "summary": "I connect the creative direction of Jigsaw Jab with production priorities and hands-on work in design, programming, and VFX.",
+  "contributions": [
+    {
+      "title": "Direction",
+      "description": "I direct the project around the connection between fighting and building a puzzle, keeping the game’s identity consistent across gameplay and presentation."
+    },
+    {
+      "title": "Production",
+      "description": "I produce the project, connecting scope, priorities, and the work needed to bring the game to a playable demo."
+    },
+    {
+      "title": "Design & development",
+      "description": "I contribute to game design, programming, and VFX alongside my direction and production responsibilities."
+    }
+  ],
+  "challenges": [
+    "The same mouse-controlled hand attacks enemies and handles puzzle pieces. The design has to support both precise placement and quick responses to danger."
+  ],
+  "production": [
+    "Production planning separates essential demo work from optional additions. Tutorial clarity, QA, and demo preparation are explicit priorities; new ideas need to fit around that playable core."
+  ],
+  "outcomes": [
+    "A playable demo is available on Steam. The full game is listed as coming soon."
   ]
 }
 ---
 
 ## The game
 
-Combat and puzzle assembly share the same arena. Defeated enemies become pieces to collect and fit into a central board, making placement part of the action.
+Jigsaw Jab is an action game built around a floating hand and a puzzle board. Enemies become puzzle pieces when defeated. The player grabs, rotates, and places them while managing the threats still on screen.
 
-## My role
+## Direction: keep the loop connected
 
-My work spans creative direction, production, game design, programming, and visual effects. This is a team project; these roles describe my contribution rather than ownership of every asset or system.
+My role combines game direction and production with design and development. The central design focus is the relationship between combat and assembly: fighting produces pieces, and fitting those pieces restores health and advances the board.
 
-## Explore the work
+## Production: protect the playable core
 
-The Steam demo is the public reference for the current playable experience. The full game is listed as coming soon.
+A demo needs to communicate its rules as well as run. Production planning prioritizes the tutorial, QA, and demo preparation, with optional additions separated from essential work. This keeps the project focused on an experience players can understand and try.
+
+## Try it
+
+The Steam demo is available now. Wishlist the full game to follow its release.

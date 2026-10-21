@@ -11,7 +11,7 @@
   "claims": [
     {
       "id": "authorship",
-      "text": "I designed and implemented the system described here. Authorship is confirmed by my account; behaviour was checked against the local project and the captures.",
+      "text": "I designed and implemented the system described here.",
       "sourceType": "author",
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
@@ -29,7 +29,7 @@
     "width": 640,
     "height": 360,
     "alt": "Three in-run upgrade cards: Ice Daggers, Sword Damage, and Sword Quickness.",
-    "caption": "The real upgrade screen, triggered in a controlled local capture. The player chooses one of three options.",
+    "caption": "At level-up, the player chooses one of three upgrades.",
     "credit": "Snowballing project material",
     "permission": "approved",
     "pixelArt": true
@@ -40,7 +40,7 @@
       "width": 640,
       "height": 360,
       "alt": "Three in-run upgrade cards: Ice Daggers, Sword Damage, and Sword Quickness.",
-      "caption": "The real upgrade screen, triggered in a controlled local capture. The player chooses one of three options.",
+      "caption": "At level-up, the player chooses one of three upgrades.",
       "credit": "Snowballing project material",
       "permission": "approved",
       "pixelArt": true
@@ -69,24 +69,24 @@
   ],
   "implementationSummary": "AbilityUpgrade resources hold IDs, limits, labels, and descriptions. The manager separates pool management from the UI. The selection screen pauses gameplay; card animations provide hover, selection, and discard feedback before play resumes.",
   "iterations": [
-    "The supplied implementation includes unlock-dependent additions and maximum-quantity removal in the upgrade manager.",
-    "A controlled local invocation of the level-up handler produced the three-option screen shown here."
+    "The system includes unlock-dependent additions and maximum-quantity removal in the upgrade manager.",
+    "The level-up screen pauses the action and presents three upgrade options."
   ],
   "outcomes": [
     "The captured screen offers three different upgrade cards, using the real resources and UI scenes.",
-    "This study documents pool rules and one exercised selection state. It does not claim statistical validation of the random distribution."
+    "Prerequisites and quantity limits keep the available choices tied to the current build."
   ],
   "evidence": [
     {
       "id": "choice-screen",
       "title": "Three-option selection",
-      "description": "Captured from the local upgrade manager and screen. The level-up event was triggered for this capture.",
+      "description": "The level-up screen presents three distinct upgrade cards.",
       "image": {
         "src": "/media/snowballing/level-up.webp",
         "width": 640,
         "height": 360,
         "alt": "Three in-run upgrade cards: Ice Daggers, Sword Damage, and Sword Quickness.",
-        "caption": "The real upgrade screen, triggered in a controlled local capture. The player chooses one of three options.",
+        "caption": "At level-up, the player chooses one of three upgrades.",
         "credit": "Snowballing project material",
         "permission": "approved",
         "pixelArt": true

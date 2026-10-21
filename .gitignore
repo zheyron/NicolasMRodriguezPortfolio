@@ -10,4 +10,6 @@ playwright-report/
 .env.*
 !.env.example
 private/
+/docs/content-audit.md
+/Portfolio_Internal/
 *.log
