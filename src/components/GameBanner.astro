@@ -1,0 +1,7 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import Cover from './Cover.astro';import CharacterScrollLayers from './CharacterScrollLayers.astro';import {withBase} from '../lib/paths';
+interface Props {item:CollectionEntry<'projects'>;eager?:boolean;}
+const {item,eager=false}=Astro.props;
+---
+<div class="game-banner"><a href={withBase('/work/'+item.id+'/',import.meta.env.BASE_URL)} aria-label={`Read ${item.data.title} case study`}><Cover title={item.data.title!} cover={item.data.banner||item.data.cover} accent={item.data.accent} eager={eager}/></a><CharacterScrollLayers layers={item.data.characterLayers}/></div>

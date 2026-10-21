@@ -74,7 +74,7 @@ Long narrative belongs below the frontmatter. Keep unknown dates, engines, team 
 
 ## Featured projects
 
-Set `featured: true` and `featuredOrder` to control Home. `src/data/home.ts` selects the main spotlight and its editorial copy; that project is excluded from the secondary featured grid to avoid duplication. The main catalogue continues to use `sortOrder`. Three projects are currently selected. Fewer strong entries are preferable to filler.
+Set `featuredChapter: true` and `chapterOrder` on 2–4 games to control Home chapters. Home currently features Jigsaw Jab and Snowballing; mods, QA and experiments appear in the compact Other Projects section. `featured` still selects mechanics, and the catalogue uses `sortOrder`. `src/data/home.ts` holds the personal hero copy and selects the project supplying its genuine character layers.
 
 ## Add a mechanic
 
@@ -135,3 +135,21 @@ Check both workflows, then open the public Home, Work, a project, a mechanic, Co
 ## Editorial provenance
 
 See `docs/content-audit.md` for the public sources, ownership boundaries and missing materials. Site implementation does not grant permission to publish private game documents. Dates in evidence records are review dates, not release dates.
+
+## Visual direction v1.2 and reusable showcase
+
+The light lavender theme lives in `src/styles/global.css`. All eight showcase components are in `src/components/`: FeaturedGameChapter, GameBanner, CharacterScrollLayers, MediaLoop, ShowcaseCard, DecisionSummary, ExpandableBreakdown and StoreCTA. No motion library was added.
+
+Optional project fields:
+
+- `banner`: approved media object, falling back to `cover` or a typographic cover.
+- `characterLayers`: up to three `{image, axis, start, end, anchor, size}` entries. `image` is an approved media object; offsets are bounded pixel values. Scroll movement is reversible and disabled on mobile/reduced motion. Omit when genuine character artwork is unavailable.
+- `showcaseCards`: two or three entries for featured chapters, with unique `id`, `kind`, `title`, `summary`, optional `media` or `loop`, and either `linkedMechanicId` or `detailAnchor`. The mechanic must belong to the project. Destination anchors are checked in the build.
+- `externalLinks`: `kind`, `label`, public HTTPS `url`, and `lastVerifiedAt`. Steam wishlists require an official Steam URL and a verified coming-soon status. Review the CTA when that status changes.
+- `loop`: local MP4/WebM `src`, approved `poster`, `label`, `caption`, `credit`, and `permission: approved`. Video loads only when visible or explicitly played, is muted, pauses offscreen/in hidden tabs, and does not autoplay under reduced motion or Save-Data. A visible play/pause control and native controls remain available. Without JavaScript, the poster and direct video link work.
+- `breakdowns`: visible `title` and `summary`, expandable `details`, and valid `evidenceIds`. Native details/summary works with keyboard and without JavaScript.
+- Project `challenges`, `production`, `iterations`, `outcomes`, `learnings`, and mechanic `alternatives` are optional; empty sections are omitted rather than filled with invented claims. Existing `team` credit is shown when supplied, without adding individual collaborators.
+
+Snowballing includes an original Snowy sprite and a nine-second local-build clip (scripted movement input, no audio). Add genuine character cutouts and gameplay for Jigsaw Jab or other games only when available. Gallery links open the original image with a descriptive caption; browser Back returns to the case. No modal gallery is required.
+
+Browser tests cover both scroll directions, static reduced-motion/mobile presentation, no-JS navigation and details, media lazy loading, play/pause, offscreen pause and Save-Data. Run them against the production preview, not the Astro development toolbar.

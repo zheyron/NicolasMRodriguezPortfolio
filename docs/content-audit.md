@@ -50,3 +50,12 @@ Add equivalent provenance records before adding more media. Inspection access is
 ## Editorial follow-up
 
 Capture a representative moving combat sequence and document production decisions with actual artefacts; add a direct public contact method and CV when supplied; deepen Gingaten only after verifying its implementation. Authorship assertions remain the author's account; reading code verifies behaviour, not who wrote each line. No made-up statistics are required for these improvements.
+
+## v1.2 visual and motion update
+
+Approved canonical addenda reviewed 2026-10-21. The light lavender layout, two featured game chapters and inline breakdowns adapt the existing Astro site. Reference portfolios supply visual direction only; their source and media are not redistributed.
+
+- `media/snowballing/snowy.png`: original 16 × 16 Snowy sprite from the supplied game project, used under the author’s explicit direction to use genuine own-game characters. No claim of individual illustration authorship.
+- `media/snowballing/gameplay-loop.mp4`: nine-second excerpt of the actual local game rendered in an isolated Godot copy at 30 fps. Movement input is scripted; enemies and gameplay run normally. No composited or invented gameplay and no audio track. The corresponding `loop-poster.webp` is a frame from that recording. Capture source, save state, logs and harness are ignored and unpublished.
+- Jigsaw Jab wishlist eligibility and demo availability were rechecked on the official Steam page on 2026-10-21. No Jigsaw gameplay clip or isolated character was supplied for this release; its banner uses the author-selected library artwork.
+- New breakdowns summarize already evidenced rules and implementation. They do not invent discarded alternatives, production constraints, measurements or playtest findings. More detailed production artefacts and author reflections remain editorial follow-up.

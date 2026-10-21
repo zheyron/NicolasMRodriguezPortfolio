@@ -130,6 +130,16 @@
       "sourceType": "public",
       "lastVerifiedAt": "2026-10-21"
     }
+  ],
+  "breakdowns": [
+    {
+      "title": "Following one purchase",
+      "summary": "Connect earned currency to persistent upgrades, and make the cost, owned level, and availability visible before the player buys.",
+      "details": "The progression autoload owns the save dictionary and file access. The purchase card reads the resource and saved quantity, disables unavailable or maxed purchases, then updates every card after a purchase. Experience-drop chance and player regeneration read the saved upgrade counts during play.",
+      "evidenceIds": [
+        "purchase-before"
+      ]
+    }
   ]
 }
 ---

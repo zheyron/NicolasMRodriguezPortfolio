@@ -94,6 +94,16 @@
       "sourceType": "author",
       "lastVerifiedAt": "2026-10-21"
     }
+  ],
+  "breakdowns": [
+    {
+      "title": "From experience to a choice",
+      "summary": "Offer a small set of distinct options, evolve the pool as abilities unlock, and remove upgrades when their limit is reached.",
+      "details": "AbilityUpgrade resources hold IDs, limits, labels, and descriptions. The manager separates pool management from the UI. The selection screen pauses gameplay; card animations provide hover, selection, and discard feedback before play resumes.",
+      "evidenceIds": [
+        "choice-screen"
+      ]
+    }
   ]
 }
 ---

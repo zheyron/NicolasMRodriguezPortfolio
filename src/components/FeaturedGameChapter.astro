@@ -1,0 +1,12 @@
+---
+import type {CollectionEntry} from 'astro:content';import GameBanner from './GameBanner.astro';import ShowcaseCard from './ShowcaseCard.astro';import StoreCTA from './StoreCTA.astro';import {withBase} from '../lib/paths';import {statusLabels} from '../lib/contracts';
+interface Props {item:CollectionEntry<'projects'>;index:number;}
+const {item,index}=Astro.props,d=item.data;
+---
+<article class="game-chapter" id={item.id} aria-labelledby={item.id+'-title'}>
+ <div class="chapter-label"><span>Selected game / {String(index+1).padStart(2,'0')}</span><span>{d.technologies.join(' · ')}</span></div>
+ <GameBanner item={item} eager={index===0}/>
+ <div class="chapter-intro"><div><h3 id={item.id+'-title'}>{d.title}</h3><p class="chapter-logline">{d.tagline||d.shortDescription}</p></div><div><p class="chapter-roles">{d.roles.join(' · ')}</p>{d.productStatus&&<span class="status-pill">{statusLabels[d.productStatus]}</span>}</div></div>
+ <div class="showcase-grid">{d.showcaseCards.map(card=><ShowcaseCard card={card} projectId={item.id}/>)}</div>
+ <div class="actions chapter-actions"><a class="button primary" href={withBase('/work/'+item.id+'/',import.meta.env.BASE_URL)}>Read Case Study <span aria-hidden="true">↗</span></a>{d.externalLinks.map(link=><StoreCTA link={link} status={d.productStatus}/>)}</div>
+</article>

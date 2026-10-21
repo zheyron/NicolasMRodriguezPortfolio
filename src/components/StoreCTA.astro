@@ -1,0 +1,8 @@
+---
+import type {CollectionEntry} from 'astro:content';
+interface Props {link:CollectionEntry<'projects'>['data']['externalLinks'][number];status?:string;}
+const {link,status}=Astro.props;
+const wishlist=link.kind==='wishlist_steam'&&status==='coming_soon';
+const label=link.kind==='wishlist_steam'?(wishlist?'Wishlist on Steam':'View on Steam'):link.label;
+---
+<a class:list={['button','store-cta',{'primary':wishlist}]} href={link.url}>{label}<span aria-hidden="true">↗</span></a>

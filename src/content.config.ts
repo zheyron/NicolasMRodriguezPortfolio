@@ -6,3 +6,4 @@ export const collections = {
   projects: defineCollection({ loader:glob({pattern:'*.md',base:'./src/content/projects'}),schema:projectSchema }),
   mechanics: defineCollection({ loader:glob({pattern:'*.md',base:'./src/content/mechanics'}),schema:mechanicSchema }),
 };
+// v1.2: optional showcase, media, and decision fields.

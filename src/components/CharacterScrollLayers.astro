@@ -1,0 +1,30 @@
+---
+import {withBase} from '../lib/paths';
+import type {CollectionEntry} from 'astro:content';
+interface Props {layers:CollectionEntry<'projects'>['data']['characterLayers'];}
+const {layers}=Astro.props;
+---
+{layers.length>0&&<div class="character-layers" aria-hidden="true" data-character-layers>{layers.map(layer=><img class:list={['character-layer','anchor-'+layer.anchor]} src={withBase(layer.image.src,import.meta.env.BASE_URL)} alt="" width={layer.image.width} height={layer.image.height} loading="lazy" style={`--character-size:${layer.size}px`} data-axis={layer.axis} data-start={layer.start} data-end={layer.end}/>)}</div>}
+<script>
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile=matchMedia('(max-width: 767px)');
+  const groups=[...document.querySelectorAll<HTMLElement>('[data-character-layers]')];
+  const active=new Set<HTMLElement>(); let pending=false;
+  function update(){
+    pending=false;
+    for(const group of active){
+      const rect=group.getBoundingClientRect();
+      const progress=Math.max(0,Math.min(1,(innerHeight-rect.top)/(innerHeight+rect.height)));
+      for(const layer of group.querySelectorAll<HTMLElement>('.character-layer')){
+        const start=Number(layer.dataset.start),end=Number(layer.dataset.end);
+        layer.style.transform=reduced.matches||mobile.matches?'none':`translate${layer.dataset.axis==='x'?'X':'Y'}(${start+(end-start)*progress}px)`;
+      }
+    }
+  }
+  function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
+  const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)active.add(entry.target as HTMLElement);else active.delete(entry.target as HTMLElement);}schedule();},{rootMargin:'100px'});
+  groups.forEach(g=>observer.observe(g));
+  addEventListener('scroll',schedule,{passive:true}); addEventListener('resize',schedule,{passive:true});
+  const reset=()=>{groups.forEach(g=>g.querySelectorAll<HTMLElement>('.character-layer').forEach(i=>i.style.transform='none'));schedule();};
+  reduced.addEventListener('change',reset);mobile.addEventListener('change',reset);
+</script>

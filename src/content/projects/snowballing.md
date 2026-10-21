@@ -149,6 +149,102 @@
       "permission": "approved",
       "pixelArt": true
     }
+  ],
+  "featuredChapter": true,
+  "chapterOrder": 2,
+  "characterLayers": [
+    {
+      "image": {
+        "src": "/media/snowballing/snowy.png",
+        "width": 16,
+        "height": 16,
+        "alt": "Snowy, the snowball golem.",
+        "caption": "Original Snowy sprite from the local game project.",
+        "credit": "Snowballing project artwork",
+        "permission": "approved",
+        "pixelArt": true
+      },
+      "axis": "x",
+      "start": -48,
+      "end": 36,
+      "anchor": "right",
+      "size": 112
+    }
+  ],
+  "loop": {
+    "src": "/media/snowballing/gameplay-loop.mp4",
+    "poster": {
+      "src": "/media/snowballing/loop-poster.webp",
+      "width": 640,
+      "height": 360,
+      "alt": "Snowy at the centre of a snowy arena with the run timer and experience bar.",
+      "caption": "Poster from the recorded local gameplay clip.",
+      "credit": "Snowballing project material",
+      "permission": "approved",
+      "pixelArt": true
+    },
+    "label": "Snowballing local gameplay",
+    "caption": "Local development build. Nine-second capture with scripted movement input; gameplay and enemies run in the game.",
+    "credit": "Snowballing project material",
+    "permission": "approved"
+  },
+  "externalLinks": [
+    {
+      "kind": "itch",
+      "label": "Play on itch.io",
+      "url": "https://fuenteki.itch.io/snowballing",
+      "lastVerifiedAt": "2026-10-21"
+    }
+  ],
+  "showcaseCards": [
+    {
+      "id": "gameplay",
+      "kind": "gameplay",
+      "title": "A small golem in motion",
+      "summary": "Movement, automatic attacks, and incoming enemies in the running local build.",
+      "loop": {
+        "src": "/media/snowballing/gameplay-loop.mp4",
+        "poster": {
+          "src": "/media/snowballing/loop-poster.webp",
+          "width": 640,
+          "height": 360,
+          "alt": "Snowy at the centre of a snowy arena with the run timer and experience bar.",
+          "caption": "Poster from the recorded local gameplay clip.",
+          "credit": "Snowballing project material",
+          "permission": "approved",
+          "pixelArt": true
+        },
+        "label": "Snowballing local gameplay",
+        "caption": "Local development build. Nine-second capture with scripted movement input; gameplay and enemies run in the game.",
+        "credit": "Snowballing project material",
+        "permission": "approved"
+      },
+      "detailAnchor": "gameplay"
+    },
+    {
+      "id": "upgrades",
+      "kind": "mechanic",
+      "title": "A choice at every level",
+      "summary": "Prerequisites, upgrade limits, and a changing pool connect experience to the next decision.",
+      "linkedMechanicId": "snowballing-upgrade-choices"
+    },
+    {
+      "id": "ownership",
+      "kind": "production",
+      "title": "Connecting the whole game",
+      "summary": "I developed most of the project, connecting core gameplay, progression, UI, audio, and feedback.",
+      "detailAnchor": "my-contribution"
+    }
+  ],
+  "breakdowns": [
+    {
+      "title": "A run continues beyond the arena",
+      "summary": "In-run upgrades and persistent purchases connect two layers of progression.",
+      "details": "The local implementation stores permanent purchases separately from the current run’s selected upgrades. The progression study follows an actual purchase: 175 currency becomes 25 after buying a 150-cost regeneration upgrade. These are controlled development captures, not a balance or retention study.",
+      "evidenceIds": [
+        "release-02"
+      ]
+    }
   ]
 }
 ---

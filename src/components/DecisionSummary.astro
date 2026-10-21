@@ -1,0 +1,6 @@
+---
+import ExpandableBreakdown from './ExpandableBreakdown.astro';
+interface Props {item:{title:string;summary:string;details:string;evidenceIds:string[]};}
+const {item}=Astro.props;
+---
+<article class="decision-summary"><h3>{item.title}</h3><p>{item.summary}</p><ExpandableBreakdown title="See breakdown" details={item.details} evidenceIds={item.evidenceIds}/></article>

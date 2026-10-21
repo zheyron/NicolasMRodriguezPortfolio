@@ -1,0 +1,34 @@
+---
+import {withBase} from '../lib/paths';
+import type {CollectionEntry} from 'astro:content';
+interface Props {media:NonNullable<CollectionEntry<'projects'>['data']['loop']>;}
+const {media}=Astro.props;
+const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
+---
+<figure class="media-loop" data-media-loop>
+ <video muted playsinline loop controls preload="none" poster={url(media.poster.src)} width={media.poster.width} height={media.poster.height} aria-label={media.label} data-src={url(media.src)}></video>
+ <button class="loop-toggle" type="button" hidden aria-label={`Play clip: ${media.label}`}>Play clip</button>
+ <figcaption>{media.caption}</figcaption>
+ <noscript><a href={url(media.src)}>Watch {media.label}</a></noscript>
+</figure>
+<script>
+ const motion=matchMedia('(prefers-reduced-motion: reduce)');
+ const connection=(navigator as Navigator & {connection?:{saveData?:boolean;addEventListener?:(name:string,callback:()=>void)=>void}}).connection;
+ const states=[...document.querySelectorAll<HTMLElement>('[data-media-loop]')].map(root=>({root,video:root.querySelector('video')!,button:root.querySelector<HTMLButtonElement>('button')!,visible:false,userPaused:false}));
+ const allowed=()=>!motion.matches&&!connection?.saveData;
+ const load=(video:HTMLVideoElement)=>{if(!video.getAttribute('src')){video.src=video.dataset.src!;video.load();}};
+ const play=async(video:HTMLVideoElement)=>{load(video);try{await video.play();}catch{ /* Native controls and poster remain usable if autoplay is unavailable. */ }};
+ states.forEach(s=>{
+   s.button.hidden=false;
+   const label=s.video.getAttribute('aria-label');
+   const sync=()=>{s.button.textContent=s.video.paused?'Play clip':'Pause clip';s.button.setAttribute('aria-label',`${s.video.paused?'Play clip:':'Pause clip:'} ${label}`);};
+   s.video.addEventListener('play',sync);s.video.addEventListener('pause',()=>{sync();if(s.visible&&allowed()&&!document.hidden)s.userPaused=true;});
+   s.button.addEventListener('click',()=>{s.userPaused=!s.video.paused;if(s.video.paused)void play(s.video);else s.video.pause();});
+   s.video.addEventListener('pointerdown',()=>load(s.video),{once:true});
+   s.video.addEventListener('keydown',()=>load(s.video),{once:true});
+ });
+ const observer=new IntersectionObserver(entries=>{for(const e of entries){const s=states.find(s=>s.root===e.target)!;s.visible=e.isIntersecting;if(s.visible&&allowed()&&!s.userPaused&&!document.hidden)void play(s.video);else s.video.pause();}},{threshold:0.2});
+ states.forEach(s=>observer.observe(s.root));
+ const preferences=()=>states.forEach(s=>{if(!allowed()||document.hidden)s.video.pause();else if(s.visible&&!s.userPaused)void play(s.video);});
+ motion.addEventListener('change',preferences);connection?.addEventListener?.('change',preferences);document.addEventListener('visibilitychange',preferences);
+</script>

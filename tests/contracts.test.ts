@@ -11,3 +11,10 @@ test('drafts may be partial; published content must be complete',()=>{assert.equ
 const proof={id:'proof',title:'Release',description:'Public evidence',publicUrl:'https://example.com',sourceType:'public',lastVerifiedAt:'2026-10-21'};
 test('evidence ids are unique and decision references resolve',()=>{assert.equal(projectSchema.safeParse({...valid,evidence:[proof,proof]}).success,false);assert.equal(projectSchema.safeParse({...valid,decisions:[{title:'Decision',problem:'Problem',action:'Action',evidenceIds:['missing']}]}).success,false);assert.equal(projectSchema.safeParse({...valid,evidence:[proof],decisions:[{title:'Decision',problem:'Problem',action:'Action',evidenceIds:['proof']}]}).success,true);});
 test('deep studies require evidence and iteration; overview is explicit',()=>{const m={...valid,parentProject:'parent',discipline:'systems',reviewStatus:'approved'};assert.equal(mechanicSchema.safeParse(m).success,true);assert.equal(mechanicSchema.safeParse({...m,depth:'case-study'}).success,false);assert.equal(mechanicSchema.safeParse({...m,depth:'case-study',evidence:[proof],problem:'Problem',intent:'Intent',designSummary:'Design',iterations:['Iteration'],outcomes:['Observed outcome']}).success,true);});
+
+test('v1.2 validates evidence, store destinations and showcase IDs',()=>{
+ assert.equal(projectSchema.safeParse({...valid,breakdowns:[{title:'A',summary:'B',details:'C',evidenceIds:['missing']}]}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,externalLinks:[{kind:'wishlist_steam',label:'Wishlist',url:'https://example.com',lastVerifiedAt:'2026-10-21'}]}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,featuredChapter:true,showcaseCards:[]}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,showcaseCards:[{id:'one',kind:'gameplay',title:'A',summary:'B'},{id:'one',kind:'design',title:'C',summary:'D'}]}).success,false);
+});

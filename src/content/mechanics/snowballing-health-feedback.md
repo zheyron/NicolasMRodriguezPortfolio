@@ -135,6 +135,16 @@
       "sourceType": "public",
       "lastVerifiedAt": "2026-10-21"
     }
+  ],
+  "breakdowns": [
+    {
+      "title": "Following one health change",
+      "summary": "Give damage and healing distinct feedback while keeping the health bar and screen response tied to the same player state.",
+      "details": "The regeneration handler reads the owned persistent upgrade count and only heals when the player has the upgrade and is below maximum health. The flash component replaces an active tween before starting another, preventing overlapping healing tweens. The damage timer creates an interval between contact-damage ticks.",
+      "evidenceIds": [
+        "before"
+      ]
+    }
   ]
 }
 ---
