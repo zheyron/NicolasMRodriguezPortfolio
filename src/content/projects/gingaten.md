@@ -23,7 +23,16 @@
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
     }
-  ]
+  ],
+  "cover": {
+    "src": "/media/gingaten/cockpit.webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "The spacecraft cockpit overlooking an asteroid field in Gingaten.",
+    "caption": "Gingaten — cockpit view and asteroid field.",
+    "credit": "Gingaten project capture",
+    "permission": "approved"
+  }
 }
 ---
 

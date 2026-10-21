@@ -95,3 +95,27 @@ test('Home projects have real covers and professional experience is distinct',as
  await expect(page.locator('#collaboration')).not.toContainText('Tempus Vitae');
  await page.goto('/work/tempus-vitae/');await expect(page.locator('main')).toContainText('Professional internship');
 });
+
+test('Mechanics keeps images and studies under their own game',async({page})=>{
+ await page.goto('/mechanics/');
+ await expect(page.getByRole('navigation',{name:'Explore mechanics by game'})).toBeVisible();
+ const expected={'jigsaw-jab':1,'snowballing':3,'gingaten':1};
+ for(const [id,count] of Object.entries(expected)){
+  const group=page.locator(`.mechanics-project#${id}`);
+  await expect(group.locator('.mechanic-card')).toHaveCount(count);
+  for(const img of await group.locator('.mechanic-card img').all()){
+   await expect(img).toHaveAttribute('src',new RegExp(`/media/${id}/`));
+   await img.scrollIntoViewIfNeeded();
+   await expect.poll(()=>img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  }
+  await expect(group.getByRole('link',{name:'View game project'})).toHaveAttribute('href',`/work/${id}/`);
+ }
+ await expect(page.locator('#snowballing')).not.toContainText('Gingaten');
+ await expect(page.locator('#gingaten')).not.toContainText('Snowballing');
+ await page.getByRole('navigation',{name:'Explore mechanics by game'}).getByRole('link',{name:/Snowballing/}).click();
+ await expect(page).toHaveURL(/mechanics\/#snowballing/);
+ for(const width of [360,390,768,1280,1920]){
+  await page.setViewportSize({width,height:900});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+ }
+});

@@ -61,7 +61,27 @@
     "caption": "The Mechamorphosis character artwork.",
     "credit": "The Mechamorphosis project artwork",
     "permission": "approved"
-  }
+  },
+  "gallery": [
+    {
+      "src": "/media/the-mechamorphosis/new-manhattan.webp",
+      "width": 1280,
+      "height": 731,
+      "alt": "Flying vehicles above a dense futuristic city.",
+      "caption": "New Manhattan — environment artwork.",
+      "credit": "The Mechamorphosis project artwork",
+      "permission": "approved"
+    },
+    {
+      "src": "/media/the-mechamorphosis/menu-environment.webp",
+      "width": 1280,
+      "height": 731,
+      "alt": "A luminous circular structure above a futuristic city.",
+      "caption": "Main-menu environment artwork.",
+      "credit": "The Mechamorphosis project artwork",
+      "permission": "approved"
+    }
+  ]
 }
 ---
 

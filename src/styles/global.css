@@ -406,3 +406,21 @@
 .more-games .project-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .home-studies .mechanic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:767px){.more-games .project-grid,.home-studies .mechanic-grid{grid-template-columns:1fr}}
+
+/* Keep each game's mechanics together, with a clear boundary around every study. */
+.mechanics-project-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.mechanics-project-nav a{display:flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--border);border-radius:12px;background:var(--surface);text-decoration:none;font-weight:700}
+.mechanics-project-nav a:hover{border-color:var(--accent);background:var(--bg-alt)}
+.mechanics-project-nav span{font-size:.72rem;font-weight:400;color:var(--text-muted)}
+.mechanics-project{scroll-margin-top:110px}
+.mechanics-project .mechanic-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.mechanics-project .mechanic-card{border:1px solid var(--border);border-radius:20px;background:var(--surface);overflow:hidden}
+.mechanics-project .mechanic-card .cover{border-radius:0}
+.mechanics-project .mechanic-copy{padding:24px}
+.mechanics-project .mechanic-parent{padding-top:16px}
+.mechanics-project .single-study{grid-template-columns:1fr}
+.mechanics-project .single-study .with-media > a{display:grid;grid-template-columns:1fr 1fr;align-items:center}
+.mechanics-project .single-study .cover{height:100%;min-height:240px}
+.mechanics-project .single-study .cover img{object-fit:cover}
+@media(max-width:1000px){.mechanics-project .mechanic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mechanics-project .single-study{grid-template-columns:1fr}}
+@media(max-width:767px){.mechanics-project .mechanic-grid{grid-template-columns:1fr}.mechanics-project .single-study .with-media > a{display:flex}.mechanics-project .single-study .cover{min-height:0}.mechanics-project-nav{gap:8px}.mechanics-project-nav a{padding:12px 16px}.mechanics-project .mechanic-copy{padding:20px}}
