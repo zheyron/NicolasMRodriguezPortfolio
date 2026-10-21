@@ -1,0 +1,23 @@
+---
+import {withBase} from '../lib/paths';
+const links=[['Work','/work/'],['Mechanics','/mechanics/'],['About','/about/'],['Contact','/contact/']];
+const path=Astro.url.pathname;
+const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
+---
+<header class="site-header"><div class="shell header-inner">
+  <a class="brand" href={url('/')}><span class="monogram" aria-hidden="true">nr<span>.</span></span><span>Nicolás Rodríguez</span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" hidden>Menu <span aria-hidden="true">＋</span></button>
+  <nav id="main-nav" aria-label="Main navigation">{links.map(([label,p])=><a href={url(p)} aria-current={path.startsWith(url(p))?'page':undefined}>{label}</a>)}</nav>
+</div></header>
+<script>
+ const button=document.querySelector<HTMLButtonElement>('.menu-toggle');
+ const nav=document.querySelector<HTMLElement>('#main-nav');
+ if(button&&nav){
+   button.hidden=false; document.documentElement.classList.add('nav-enhanced');
+   const close=()=>{button.setAttribute('aria-expanded','false');nav.classList.remove('is-open');};
+   button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);});
+   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){close();button.focus();}});
+   nav.addEventListener('click',e=>{if((e.target as HTMLElement).closest('a'))close();});
+   matchMedia('(min-width: 768px)').addEventListener('change',close);
+ }
+</script>

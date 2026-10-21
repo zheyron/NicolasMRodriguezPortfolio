@@ -1,0 +1,14 @@
+import {readFileSync,readdirSync,existsSync,statSync} from 'node:fs';import {resolve,relative,join} from 'node:path';import assert from 'node:assert/strict';import {load} from 'cheerio';import {normalizeBase,withBase} from '../src/lib/paths.ts';
+const root=resolve('dist');const base=normalizeBase(process.env.BASE_PATH||'/');const site=process.env.SITE_URL||'https://zheyron.github.io';
+function walk(dir){return readdirSync(dir).flatMap(n=>{const p=join(dir,n);return statSync(p).isDirectory()?walk(p):[p];});}
+const files=walk(root);const pages=files.filter(p=>p.endsWith('.html'));assert(pages.length>=19,`Expected all routes, got ${pages.length}`);
+for(const required of ['index.html','work/index.html','mechanics/index.html','about/index.html','contact/index.html','404.html','robots.txt','sitemap-index.xml','og-default.png'])assert(existsSync(join(root,required)),`Missing ${required}`);
+let checked=0;
+for(const file of pages){const text=readFileSync(file,'utf8'),$=load(text);assert.equal($('h1').length,1,file+' H1');assert.equal($('html').attr('lang'),'en');assert($('title').text());assert($('meta[name="description"]').attr('content'));const canonical=$('link[rel="canonical"]').attr('href');const localPath=relative(root,file).replaceAll('\\','/').replace(/index\.html$/,'');assert.equal(canonical,new URL(withBase(localPath,base),site).href,`Canonical ${file}`);assert.equal($('meta[property="og:url"]').attr('content'),canonical);
+for(const el of $('[href],[src]').toArray()){const v=$(el).attr('href')||$(el).attr('src');if(!v||/^(https?:|mailto:|tel:|data:)/.test(v))continue;assert.notEqual(v,'#',`Dead link ${file}`);const u=new URL(v,canonical);if(v.startsWith('#')){assert($(`[id="${decodeURIComponent(u.hash.slice(1))}"]`).length,`Missing fragment ${v} ${file}`);continue;}assert(u.pathname.startsWith(base),`Missing base: ${v}`);let p=decodeURIComponent(u.pathname.slice(base.length));if(!p||p.endsWith('/'))p+='index.html';const target=join(root,p);assert(existsSync(target),`Missing asset or route ${v} in ${file}`);checked++;}
+for(const img of $('img').toArray())assert($(img).attr('alt')!==undefined,'Missing alt');
+assert(!/docs\.google\.com|D:\\|C:\\Users|PRIVATE KEY|ghp_[A-Za-z0-9]{20}/.test(text),`Sensitive content in ${file}`);
+}
+for(const f of files){assert(!/(?:^|[\\/])(?:\.env|private|drafts|node_modules|src)(?:[\\/.]|$)/.test(relative(root,f)),`Private output ${f}`);}
+const sitemap=readFileSync(join(root,'sitemap-0.xml'),'utf8');assert(!sitemap.includes('/404'));assert(sitemap.includes(new URL(base+'work/',site).href));assert(readFileSync(join(root,'robots.txt'),'utf8').includes(new URL(base+'sitemap-index.xml',site).href));
+console.log(`PASS: ${pages.length} HTML pages, ${checked} local links/assets, SEO, 404, sitemap and output privacy. Base: ${base}`);

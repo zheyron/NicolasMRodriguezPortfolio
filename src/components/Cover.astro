@@ -1,0 +1,8 @@
+---
+import {withBase} from '../lib/paths';
+interface Props { title:string; accent?:string; category?:string; index?:string; cover?:{src:string;alt:string;width:number;height:number}; eager?:boolean }
+const {title,accent='mint',category='Game project',index='01',cover,eager=false}=Astro.props;
+---
+<div class:list={['cover',`tone-${accent}`,{'has-image':!!cover}]}>
+{cover?<img src={withBase(cover.src,import.meta.env.BASE_URL)} alt={cover.alt} width={cover.width} height={cover.height} loading={eager?'eager':'lazy'} decoding="async"/>:<div class="type-cover" aria-hidden="true"><span class="cover-category">{category}</span><span class="cover-title">{title}</span><span class="cover-bottom"><span>SELECTED WORK / NR</span><span>{index}</span></span></div>}
+</div>

@@ -1,0 +1,6 @@
+---
+import {withBase} from '../lib/paths';
+interface Props {video:{url:string;label:string;poster?:{src:string;alt:string;width:number;height:number;caption:string}}}
+const {video}=Astro.props;
+---
+<figure class="video-poster"><a href={video.url}>{video.poster&&<img src={withBase(video.poster.src,import.meta.env.BASE_URL)} alt={video.poster.alt} width={video.poster.width} height={video.poster.height} loading="lazy"/>}<span class="button">▶ {video.label} ↗</span></a>{video.poster&&<figcaption>{video.poster.caption}</figcaption>}</figure>

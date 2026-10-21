@@ -133,4 +133,3 @@ Check both workflows, then open the public Home, Work, a project, a mechanic, Co
 ## Editorial provenance
 
 See `docs/content-audit.md` for the public sources, ownership boundaries and missing materials. Site implementation does not grant permission to publish private game documents. Dates in evidence records are review dates, not release dates.
-

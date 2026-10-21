@@ -1,0 +1,30 @@
+{
+  "name": "nicolas-game-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "astro build && node scripts/smoke-static.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "test:bases": "node scripts/test-bases.mjs",
+    "test:publication": "node scripts/test-publication.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "cheerio": "1.2.0",
+    "typescript": "6.0.3"
+  }
+}

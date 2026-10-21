@@ -1,0 +1,6 @@
+---
+import type {CollectionEntry} from 'astro:content';import {withBase} from '../lib/paths';
+interface Props {item:CollectionEntry<'mechanics'>;parentTitle?:string}
+const {item,parentTitle}=Astro.props;const d=item.data;
+---
+<article class="mechanic-card"><a href={withBase(`/mechanics/${item.id}/`,import.meta.env.BASE_URL)}><div class="eyebrow">{d.discipline} <span> / {d.depth==='case-study'?'Case study':'Overview'}</span></div><h3>{d.title}<span aria-hidden="true">↗</span></h3><p>{d.shortDescription}</p><div class="mechanic-parent">{parentTitle}</div></a></article>

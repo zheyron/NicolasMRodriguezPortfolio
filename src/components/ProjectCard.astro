@@ -1,0 +1,13 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import Cover from './Cover.astro';
+import {statusLabels} from '../lib/contracts';
+import {withBase} from '../lib/paths';
+interface Props {item:CollectionEntry<'projects'>;index?:number}
+const {item,index=1}=Astro.props;const d=item.data;
+---
+<article class="project-card"><a class="card-link" href={withBase(`/work/${item.id}/`,import.meta.env.BASE_URL)}>
+<Cover title={d.title!} accent={d.accent} category={d.projectType==='modding'?'Modding / Kenshi':d.technologies.join(' · ')||'Project overview'} index={String(index).padStart(2,'0')} cover={d.cover}/>
+<div class="card-meta"><span>{d.roles.slice(0,2).join(' / ')}</span>{d.productStatus&&<span class="status">{statusLabels[d.productStatus]}</span>}</div>
+<div class="card-heading"><h3>{d.title}</h3><span aria-hidden="true">↗</span></div><p>{d.shortDescription}</p>
+</a></article>
