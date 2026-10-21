@@ -49,7 +49,7 @@
       "src": "/media/duskheir/moon-bridges.webp",
       "width": 1280,
       "height": 720,
-      "alt": "The Moon bridge is visible while yellow particles mark the Sun bridge.",
+      "alt": "The Moon bridge is visible while red particles mark the Sun bridge.",
       "caption": "Moon state — the same two objects exchange visibility.",
       "credit": "Project capture",
       "permission": "approved"
