@@ -7,7 +7,7 @@ const {projects,mechanics}=await content();
 const groups=projects.map(project=>({project,studies:mechanics.filter(item=>item.data.parentProject===project.id)})).filter(group=>group.studies.length);
 const url=(path:string)=>withBase(path,import.meta.env.BASE_URL);
 ---
-<BaseLayout title="Mechanics & Systems" description="Explore game design and implementation, organised by project: Jigsaw Jab, Snowballing, and Gingaten.">
+<BaseLayout title="Mechanics & Systems" description="Explore game design and implementation by project: AI, progression, world states, terrain, movement, and presentation.">
   <div class="shell mechanics-index">
     <header class="page-heading">
       <p class="eyebrow">The portfolio / Mechanics</p>

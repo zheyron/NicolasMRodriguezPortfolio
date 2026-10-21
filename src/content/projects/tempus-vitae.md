@@ -77,14 +77,30 @@
       "title": "Debugging & documentation",
       "description": "I used Unity debugging tools to inspect logs and verify fixes, created test cases, and contributed feedback on UI, UX, and game design."
     }
+  ],
+  "breakdowns": [
+    {
+      "title": "From a report to a verified fix",
+      "summary": "Reproduction, documentation, and confirmation across builds.",
+      "details": "I documented bugs in Jira, worked with designers and developers to reproduce issues, and checked fixes in subsequent builds. Unity logs and debugging tools helped investigate problems. My test cases and documentation supported repeatable checks through the development cycle.",
+      "evidenceIds": [
+        "eva"
+      ]
+    }
   ]
 }
 ---
 
 ## QA at Whiteboard Games
 
-During a remote internship from December 2024 to March 2025, I tested Tempus Vitae across multiple builds. My work included test execution, bug documentation, reproduction steps, and checking fixes throughout development.
+I worked remotely as a QA Tester intern from December 2024 to March 2025. On Tempus Vitae, my responsibilities included executing tests, documenting bugs, reproducing issues, and verifying fixes across game builds.
+
+## Testing through development
+
+I ran functional and non-functional tests, including smoke, regression, confirmation, sanity, localization, integration, stress, and acceptance testing. I tracked issues in Jira and used Unity debugging tools to inspect logs, assets, and fixes.
+
+I also developed test cases and documentation, followed bug reports through sprints, and contributed feedback on UI, UX, and game design.
 
 ## The game
 
-Tempus Vitae is a science-fiction FPS metroidvania by Whiteboard Games. Its EVA presentation follows an astronaut exploring a space station across two time periods.
+Tempus Vitae is a science-fiction FPS metroidvania by Whiteboard Games. Its public EVA presentation follows an astronaut exploring a space station across two time periods.

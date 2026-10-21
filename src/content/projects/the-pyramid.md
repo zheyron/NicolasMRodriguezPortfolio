@@ -33,16 +33,48 @@
     "caption": "An interior from The Pyramid.",
     "credit": "The Pyramid project artwork",
     "permission": "approved"
-  }
+  },
+  "contributions": [
+    {
+      "title": "Production",
+      "description": "I contributed to the production of the four-character platform-and-puzzle game."
+    },
+    {
+      "title": "Gameplay systems",
+      "description": "I implemented event queues and a save system."
+    },
+    {
+      "title": "Time-reversal ability",
+      "description": "I implemented one character’s ability to go back in time."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "game-environment",
+      "title": "Inside The Pyramid",
+      "image": {
+        "src": "/media/the-pyramid/cover.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "A torch-lit stone passage inside The Pyramid.",
+        "caption": "An interior from The Pyramid.",
+        "credit": "The Pyramid project artwork",
+        "permission": "approved"
+      },
+      "description": "Project environment image. It presents the game; the contribution summary records my role in production and systems programming.",
+      "sourceType": "author",
+      "lastVerifiedAt": "2026-10-21"
+    }
+  ]
 }
 ---
 
-## Project overview
+## Four characters, shared puzzles
 
-The Pyramid combines platforming and puzzles in a 2D Unity game with four characters.
+The Pyramid is a 2D platform-and-puzzle game built in Unity around four playable characters. The player switches between characters while moving through the environment and interacting with its puzzles.
 
-## My contribution
+## My systems work
 
-My work includes production and the implementation of several gameplay systems: event queues, a save system, and the ability of one character to go back in time.
+My contribution combines production with gameplay programming. I implemented event queues, a save system, and a character’s time-reversal ability. These are distinct parts of my work: coordinating gameplay events, preserving progress, and giving a character a way to revisit a previous moment.
 
-This overview records my work without reconstructing implementation details or claiming outcomes that have not been documented.
+The image above shows the game’s environment. My contribution is focused on production and the systems described here.

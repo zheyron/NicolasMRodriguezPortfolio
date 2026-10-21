@@ -33,6 +33,22 @@
       "publicUrl": "https://fuenteki.itch.io/the-mechamorphosis",
       "sourceType": "public",
       "lastVerifiedAt": "2026-10-21"
+    },
+    {
+      "id": "menu-capture",
+      "title": "Menu and options",
+      "image": {
+        "src": "/media/the-mechamorphosis/options.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Music and sound-effect sliders in The Mechamorphosis options menu.",
+        "caption": "Separate music and SFX controls inside the game’s interface.",
+        "credit": "Project capture",
+        "permission": "approved"
+      },
+      "description": "Captured from the running project. The options panel connects its sliders to separate music and sound-effect buses.",
+      "sourceType": "author",
+      "lastVerifiedAt": "2026-10-21"
     }
   ],
   "claims": [
@@ -64,37 +80,57 @@
   },
   "gallery": [
     {
+      "src": "/media/the-mechamorphosis/menu.webp",
+      "width": 1280,
+      "height": 720,
+      "alt": "The Mechamorphosis title menu over its futuristic city.",
+      "caption": "The main menu — visual identity, navigation, and music.",
+      "credit": "Project capture",
+      "permission": "approved"
+    },
+    {
+      "src": "/media/the-mechamorphosis/options.webp",
+      "width": 1280,
+      "height": 720,
+      "alt": "Music and sound-effect sliders in The Mechamorphosis options menu.",
+      "caption": "Separate music and SFX controls inside the game’s interface.",
+      "credit": "Project capture",
+      "permission": "approved"
+    },
+    {
       "src": "/media/the-mechamorphosis/new-manhattan.webp",
       "width": 1280,
       "height": 731,
       "alt": "Flying vehicles above a dense futuristic city.",
       "caption": "New Manhattan — environment artwork.",
-      "credit": "The Mechamorphosis project artwork",
+      "credit": "Project capture",
       "permission": "approved"
+    }
+  ],
+  "summary": "I worked across the story’s adaptation, character and art direction, and the systems that frame the reading experience.",
+  "contributions": [
+    {
+      "title": "Adaptation & narrative",
+      "description": "I developed the original adaptation and co-wrote part of the script, translating the premise into a science-fiction story about Marcus and his family."
     },
     {
-      "src": "/media/the-mechamorphosis/menu-environment.webp",
-      "width": 1280,
-      "height": 731,
-      "alt": "A luminous circular structure above a futuristic city.",
-      "caption": "Main-menu environment artwork.",
-      "credit": "The Mechamorphosis project artwork",
-      "permission": "approved"
+      "title": "Design & visual direction",
+      "description": "I participated in the project’s design decisions, character design, and visual and artistic direction."
+    },
+    {
+      "title": "Audio, menus & VFX",
+      "description": "I implemented the audio system, menus, and some visual effects, connecting the presentation around the narrative."
     }
   ]
 }
 ---
 
-## A story about connection
+## Adapting the premise
 
-The Mechamorphosis is a science-fiction visual novel inspired by Kafka’s The Metamorphosis. Its story centres on Marcus and his family in a world reshaped by technology.
+The Mechamorphosis takes Kafka’s transformation into a science-fiction setting. Marcus’s changed body becomes the starting point for a story about identity and family relationships. My work began with the original adaptation and extended into part of the script, character design, and the project’s visual direction.
 
-## My contribution
+## Framing the story
 
-I created the original adaptation and co-wrote part of the script. I was involved in the design decisions, character design, and visual and artistic direction of the project.
+The menu and audio systems sit around the reading experience: the title screen establishes the setting, options give the player control over sound, and transitions connect interface changes. The linked breakdown follows that implementation with captures of the actual menus.
 
-Alongside production, my implementation work includes the audio system, menus, and some visual effects.
-
-## Public reference
-
-The linked project page provides a Spanish-language playable demo and the current availability information.
+The Spanish-language demo is available on the official project page.
