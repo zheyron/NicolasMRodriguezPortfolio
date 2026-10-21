@@ -119,3 +119,34 @@ test('Mechanics keeps images and studies under their own game',async({page})=>{
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
  }
 });
+
+test('Workshop totals, accessible chart and complete catalogue',async({page})=>{
+ await page.goto('/work/kenshi-mods/');
+ await expect(page.locator('.impact-totals')).toContainText('218,338');
+ await expect(page.locator('.impact-totals')).toContainText('674,998');
+ await expect(page.locator('.subscription-bars li')).toHaveCount(6);
+ await expect(page.locator('.subscription-bars li').first()).toContainText('Martial Village');
+ await expect(page.locator('.impact-scope')).toContainText('not unique players');
+ await page.locator('.workshop-catalogue summary').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('.workshop-catalogue')).toHaveAttribute('open','');
+ await expect(page.locator('.workshop-catalogue tbody tr')).toHaveCount(21);
+ const total=await page.locator('.workshop-catalogue tbody tr td:first-of-type').evaluateAll(cells=>cells.reduce((sum,c)=>sum+Number(c.textContent!.replaceAll(',','')),0));
+ expect(total).toBe(218338);
+ const audit=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();expect(audit.violations).toEqual([]);
+ for(const width of [360,390,768,1280,1920]){await page.setViewportSize({width,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+});
+
+test('Jigsaw native cursor states and reversible character movement',async({page,browser})=>{
+ await page.setViewportSize({width:1280,height:900});await page.goto('/');
+ await expect(page.locator('body')).toHaveCSS('cursor',/cursor\/normal\.png/);
+ const link=page.getByRole('link',{name:'View Work',exact:true});await link.hover();await expect(link).toHaveCSS('cursor',/cursor\/hover\.png/);
+ await page.mouse.down();await expect(page.locator('html')).toHaveAttribute('data-game-cursor-pressed','');await expect(link).toHaveCSS('cursor',/cursor\/pressed\.png/);
+ await page.mouse.move(5,5);await page.mouse.up();await expect(page.locator('html')).not.toHaveAttribute('data-game-cursor-pressed');
+ const layers=page.locator('#jigsaw-jab .character-layer');await expect(layers).toHaveCount(2);
+ await layers.first().scrollIntoViewIfNeeded();await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).not.toBe('none');
+ const top=await page.evaluate(()=>scrollY);const initial=await layers.first().evaluate(el=>getComputedStyle(el).transform);
+ await page.evaluate(()=>scrollBy(0,180));await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).not.toBe(initial);
+ await page.evaluate(y=>scrollTo(0,y),top);await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).toBe(initial);
+ await page.emulateMedia({reducedMotion:'reduce'});for(const layer of await layers.all())await expect(layer).toHaveCSS('transform','none');
+ const touch=await browser.newContext({hasTouch:true,isMobile:true,viewport:{width:390,height:844}});const p=await touch.newPage();await p.goto('http://127.0.0.1:4321/');await expect(p.locator('body')).not.toHaveCSS('cursor',/cursor\/normal/);await touch.close();
+});

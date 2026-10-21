@@ -1,0 +1,46 @@
+---
+import type {CollectionEntry} from 'astro:content';
+interface Props {data:NonNullable<CollectionEntry<'projects'>['data']['workshopImpact']>}
+const {data}=Astro.props;
+const items=[...data.items].sort((a,b)=>b.subscribers-a.subscribers||a.id.localeCompare(b.id));
+const top=items.slice(0,6), max=top[0].subscribers||1;
+const highlight=items.find(i=>i.id===data.highlightId)!;
+const number=(value:number)=>new Intl.NumberFormat('en-US').format(value);
+const date=new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(data.observedAt+'T00:00:00Z'));
+const total=(key:'subscribers'|'lifetimeSubscriptions')=>items.reduce((sum,item)=>sum+item[key],0);
+---
+<section class="workshop-impact section" aria-labelledby="community-impact">
+  <header class="section-heading"><div><p class="eyebrow">Kenshi / Steam Workshop</p><h2 id="community-impact">Community impact</h2></div><a class="text-link" href={data.profileUrl}>Explore my Workshop ↗</a></header>
+  <dl class="impact-totals">
+    <div><dt>Current subscriptions</dt><dd>{number(total('subscribers'))}</dd></div>
+    <div><dt>Lifetime subscriptions</dt><dd>{number(total('lifetimeSubscriptions'))}</dd></div>
+    <div><dt>Published mods</dt><dd>{items.length}</dd></div>
+  </dl>
+  <p class="impact-scope">Across the {items.length} Kenshi items published under Zheyron. Totals count subscriptions across mods, not unique players.</p>
+  <div class="impact-layout">
+    <figure class="subscription-chart" aria-labelledby="subscription-chart-title">
+      <figcaption id="subscription-chart-title"><h3>Most subscribed mods</h3><p>Current subscribers · top {top.length}</p></figcaption>
+      <ol class="subscription-bars">{top.map(item=><li>
+        <div class="bar-label"><a href={item.url}>{item.title}</a><span>{number(item.subscribers)}</span></div>
+        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${item.subscribers/max*100}%`}/></span>
+      </li>)}</ol>
+    </figure>
+    <aside class="workshop-highlight" aria-labelledby="martial-impact-title">
+      <p class="eyebrow">Community spotlight</p><h3 id="martial-impact-title">{highlight.title}</h3>
+      <p>A village, its stories, and a place for players to compare discoveries and report issues.</p>
+      <dl>
+        <div><dt>Workshop collections</dt><dd>{number(data.collections)}</dd></div>
+        <div><dt>Player ratings</dt><dd>{number(data.ratings)}</dd></div>
+        <div><dt>Comments</dt><dd>{number(data.comments)}</dd></div>
+      </dl>
+      <a class="text-link" href={highlight.url}>Visit Martial Village ↗</a>
+    </aside>
+  </div>
+  <details class="workshop-catalogue">
+    <summary>Explore all {items.length} published mods</summary>
+    <div class="workshop-table-scroll" role="region" aria-label="Workshop subscription data" tabindex="0">
+      <table><caption>Subscriptions by mod · {date}</caption><thead><tr><th scope="col">Mod</th><th scope="col">Current</th><th scope="col">Lifetime</th></tr></thead><tbody>{items.map(item=><tr><th scope="row"><a href={item.url}>{item.title}</a></th><td>{number(item.subscribers)}</td><td>{number(item.lifetimeSubscriptions)}</td></tr>)}</tbody></table>
+    </div>
+  </details>
+  <p class="impact-source">Steam Workshop snapshot · <time datetime={data.observedAt}>{date}</time>. Counts change over time. Each mod links to its public listing. Shared projects published by other accounts are excluded from these totals.</p>
+</section>

@@ -218,6 +218,42 @@
   ],
   "outcomes": [
     "A playable demo is available on Steam. The full game is listed as coming soon."
+  ],
+  "characterLayers": [
+    {
+      "image": {
+        "src": "/media/jigsaw-jab/lancer.webp",
+        "alt": "Jigsaw Jab lancer character.",
+        "width": 128,
+        "height": 64,
+        "caption": "Original lancer sprite from Jigsaw Jab.",
+        "credit": "Jigsaw Jab project artwork",
+        "permission": "approved",
+        "pixelArt": true
+      },
+      "axis": "x",
+      "start": -70,
+      "end": 90,
+      "anchor": "left",
+      "size": 144
+    },
+    {
+      "image": {
+        "src": "/media/jigsaw-jab/archer.webp",
+        "alt": "Jigsaw Jab archer character.",
+        "width": 80,
+        "height": 64,
+        "caption": "Original archer sprite from Jigsaw Jab.",
+        "credit": "Jigsaw Jab project artwork",
+        "permission": "approved",
+        "pixelArt": true
+      },
+      "axis": "x",
+      "start": 70,
+      "end": -90,
+      "anchor": "right",
+      "size": 144
+    }
   ]
 }
 ---

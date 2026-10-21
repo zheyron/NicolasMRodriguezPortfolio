@@ -8,6 +8,23 @@ const characterLayer=z.object({image:media,axis:z.enum(['x','y']).default('y'),s
 const breakdown=z.object({title:z.string().min(1),summary:z.string().min(1),details:z.string().min(1),evidenceIds:z.array(id).min(1)});
 const evidence = z.object({ id, title:z.string().min(1), description:z.string().min(1), publicUrl:httpsUrl.optional(), image:media.optional(), sourceType:z.enum(['author','public']), lastVerifiedAt:z.iso.date() }).refine(e => !!e.publicUrl || !!e.image, 'Evidence needs a public URL or approved image');
 const decision = z.object({ title:z.string(), problem:z.string(), action:z.string(), rationale:z.string().optional(), outcome:z.string().optional(), evidenceIds:z.array(id).min(1) });
+export const workshopImpactSchema=z.object({
+  observedAt:z.iso.date(), profileUrl:httpsUrl,
+  highlightId:z.string().regex(/^\d+$/),
+  collections:z.number().int().nonnegative(), ratings:z.number().int().nonnegative(), comments:z.number().int().nonnegative(),
+  items:z.array(z.object({
+    id:z.string().regex(/^\d+$/), title:z.string().min(1), url:httpsUrl,
+    subscribers:z.number().int().nonnegative(), lifetimeSubscriptions:z.number().int().nonnegative(),
+    favorites:z.number().int().nonnegative(), visitors:z.number().int().nonnegative(),
+  })).min(1),
+}).superRefine((data,ctx)=>{
+  if(new Set(data.items.map(i=>i.id)).size!==data.items.length)ctx.addIssue({code:'custom',message:'Workshop item IDs must be unique'});
+  if(!data.items.some(i=>i.id===data.highlightId))ctx.addIssue({code:'custom',message:'Highlighted Workshop item must be in the catalogue'});
+  for(const item of data.items){
+    if(new URL(item.url).hostname!=='steamcommunity.com')ctx.addIssue({code:'custom',message:'Workshop statistics require a Steam Community source'});
+    if(item.lifetimeSubscriptions<item.subscribers)ctx.addIssue({code:'custom',message:'Lifetime subscriptions cannot be below current subscribers'});
+  }
+});
 const common = {
   title:z.string().optional(), shortDescription:z.string().max(120).optional(), published:z.boolean().default(false),
   sortOrder:z.number().int().nonnegative().default(999), featured:z.boolean().default(false), featuredOrder:z.number().int().nonnegative().optional(),
@@ -35,6 +52,7 @@ export const projectSchema=z.object({ ...common,
   productStatus:z.enum(['coming_soon','demo','prototype','in_development','released','published_mod']).optional(),
   technologies:z.array(z.string()).default([]), availability:z.string().optional(), team:z.string().optional(),
   tagline:z.string().optional(), summary:z.string().optional(),
+  workshopImpact:workshopImpactSchema.optional(),
   featuredChapter:z.boolean().default(false), chapterOrder:z.number().int().nonnegative().optional(), banner:media.optional(),
   characterLayers:z.array(characterLayer).max(3).default([]),
   showcaseCards:z.array(z.object({id,title:z.string().min(1),summary:z.string().min(1),kind:z.enum(['gameplay','design','production','mechanic']),media:media.optional(),loop:loop.optional(),linkedMechanicId:id.optional(),detailAnchor:id.optional()})).max(3).default([]),

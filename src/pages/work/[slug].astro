@@ -5,6 +5,7 @@ import DecisionSummary from '../../components/DecisionSummary.astro';
 import MediaLoop from '../../components/MediaLoop.astro';
 import StoreCTA from '../../components/StoreCTA.astro';
 import SteamPanel from '../../components/SteamPanel.astro';
+import WorkshopImpact from '../../components/WorkshopImpact.astro';
 import Cover from '../../components/Cover.astro';
 import EvidenceList from '../../components/EvidenceList.astro';
 import VideoPoster from '../../components/VideoPoster.astro';
@@ -30,6 +31,7 @@ const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
   </header>
   <figure class="project-hero"><Cover title={d.title!} accent={d.accent} cover={d.cover} category={d.technologies.join(' / ')||d.projectType} eager/>{d.cover&&<figcaption>{d.cover.caption}</figcaption>}</figure>
   <dl class="metadata"><div><dt>My role</dt><dd>{d.roles.join(' · ')}</dd></div>{d.technologies.length>0&&<div><dt>Tools</dt><dd>{d.technologies.join(' · ')}</dd></div>}{d.productStatus&&<div><dt>Status</dt><dd>{statusLabels[d.productStatus]}</dd></div>}{d.context&&<div><dt>Context</dt><dd>{d.context==='internship'?'Professional internship':d.context.replaceAll('-',' ')}</dd></div>}</dl>
+  {d.workshopImpact&&<WorkshopImpact data={d.workshopImpact}/>}
   <section id="my-contribution" class="project-ownership"><div><p class="eyebrow">My contribution</p><h2>My part in<br/>the game.</h2></div><div><p class="large-copy">{d.attribution}</p>{d.summary&&<p>{d.summary}</p>}</div></section>
   {d.contributions.length>0&&<section class="contribution-list" aria-label="My responsibilities">{d.contributions.map((c,i)=><article><span class="contribution-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div><h3>{c.title}</h3><p>{c.description}</p></div></article>)}</section>}
   {related.length>0&&<section id="studies" class="section"><div class="section-heading"><div><p class="eyebrow">Design & implementation</p><h2>Inside this project</h2></div><p>Explore the systems in detail.</p></div><div class="mechanic-grid">{related.map(m=><MechanicCard item={m} parentTitle={d.title}/>)}</div></section>}

@@ -18,3 +18,13 @@ test('v1.2 validates evidence, store destinations and showcase IDs',()=>{
  assert.equal(projectSchema.safeParse({...valid,featuredChapter:true,showcaseCards:[]}).success,false);
  assert.equal(projectSchema.safeParse({...valid,showcaseCards:[{id:'one',kind:'gameplay',title:'A',summary:'B'},{id:'one',kind:'design',title:'C',summary:'D'}]}).success,false);
 });
+
+test('Workshop metrics reject duplicate items, invalid counts and unverified destinations',()=>{
+ const item={id:'123',title:'Mod',url:'https://steamcommunity.com/sharedfiles/filedetails/?id=123',subscribers:10,lifetimeSubscriptions:20,favorites:1,visitors:30};
+ const impact={observedAt:'2026-10-21',profileUrl:'https://steamcommunity.com/id/zheyron/myworkshopfiles?appid=233860',highlightId:'123',collections:1,ratings:2,comments:3,items:[item]};
+ assert.equal(projectSchema.safeParse({...valid,workshopImpact:impact}).success,true);
+ assert.equal(projectSchema.safeParse({...valid,workshopImpact:{...impact,items:[item,item]}}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,workshopImpact:{...impact,items:[{...item,subscribers:-1}]}}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,workshopImpact:{...impact,items:[{...item,lifetimeSubscriptions:5}]}}).success,false);
+ assert.equal(projectSchema.safeParse({...valid,workshopImpact:{...impact,items:[{...item,url:'https://example.com'}]}}).success,false);
+});

@@ -1,0 +1,25 @@
+---
+import {withBase} from '../lib/paths';
+const asset=(state:string)=>withBase(`/media/jigsaw-jab/cursor/${state}.png`,import.meta.env.BASE_URL);
+const rules=`@media (hover:hover) and (pointer:fine) {
+  html,body { cursor:url("${asset('normal')}") 12 11,auto; }
+  :is(a[href],button,summary,select,label[for],[role="button"]) { cursor:url("${asset('hover')}") 12 11,pointer; }
+  html[data-game-cursor-pressed],html[data-game-cursor-pressed] * { cursor:url("${asset('pressed')}") 12 14,grabbing!important; }
+  input,textarea,[contenteditable="true"] { cursor:text; }
+  button:disabled,[aria-disabled="true"] { cursor:not-allowed; }
+}`;
+---
+{['normal','hover','pressed'].map(state=><link rel="preload" as="image" href={asset(state)} media="(hover:hover) and (pointer:fine)"/>)}
+<style is:inline set:html={rules}/>
+<script>
+  const fine=matchMedia('(hover:hover) and (pointer:fine)');
+  const release=()=>delete document.documentElement.dataset.gameCursorPressed;
+  addEventListener('pointerdown',event=>{
+    if(fine.matches&&event.pointerType==='mouse'&&event.button===0)document.documentElement.dataset.gameCursorPressed='';
+  });
+  addEventListener('pointerup',release);
+  addEventListener('pointercancel',release);
+  addEventListener('blur',release);
+  addEventListener('dragend',release);
+  fine.addEventListener('change',release);
+</script>
