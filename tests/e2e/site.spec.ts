@@ -143,10 +143,18 @@ test('Jigsaw native cursor states and reversible character movement',async({page
  await page.mouse.down();await expect(page.locator('html')).toHaveAttribute('data-game-cursor-pressed','');await expect(link).toHaveCSS('cursor',/cursor\/pressed\.png/);
  await page.mouse.move(5,5);await page.mouse.up();await expect(page.locator('html')).not.toHaveAttribute('data-game-cursor-pressed');
  const layers=page.locator('#jigsaw-jab .character-layer');await expect(layers).toHaveCount(2);
- await layers.first().scrollIntoViewIfNeeded();await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).not.toBe('none');
- const top=await page.evaluate(()=>scrollY);const initial=await layers.first().evaluate(el=>getComputedStyle(el).transform);
- await page.evaluate(()=>scrollBy(0,180));await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).not.toBe(initial);
- await page.evaluate(y=>scrollTo(0,y),top);await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).toBe(initial);
+ await page.evaluate(async()=>{await document.fonts.ready;});
+ const top=await page.locator('#jigsaw-jab .game-banner').evaluate(el=>Math.round(el.getBoundingClientRect().top+scrollY-120));
+ await page.evaluate(y=>scrollTo({top:y,behavior:'instant'}),top);
+ await expect.poll(()=>layers.first().evaluate(el=>{
+  const rect=el.closest('[data-character-layers]')!.getBoundingClientRect();
+  const progress=Math.max(0,Math.min(1,(innerHeight-rect.top)/(innerHeight+rect.height)));
+  const start=Number((el as HTMLElement).dataset.start),end=Number((el as HTMLElement).dataset.end);
+  return Math.abs(new DOMMatrixReadOnly(getComputedStyle(el).transform).m41-(start+(end-start)*progress));
+ })).toBeLessThan(.01);
+ const initial=await layers.first().evaluate(el=>getComputedStyle(el).transform);
+ await page.evaluate(y=>scrollTo({top:y+180,behavior:'instant'}),top);await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).not.toBe(initial);
+ await page.evaluate(y=>scrollTo({top:y,behavior:'instant'}),top);await expect.poll(()=>layers.first().evaluate(el=>getComputedStyle(el).transform)).toBe(initial);
  await page.emulateMedia({reducedMotion:'reduce'});for(const layer of await layers.all())await expect(layer).toHaveCSS('transform','none');
  const touch=await browser.newContext({hasTouch:true,isMobile:true,viewport:{width:390,height:844}});const p=await touch.newPage();await p.goto('http://127.0.0.1:4321/');await expect(p.locator('body')).not.toHaveCSS('cursor',/cursor\/normal/);await touch.close();
 });
