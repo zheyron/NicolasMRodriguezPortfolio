@@ -31,7 +31,16 @@
       "reviewStatus": "approved"
     }
   ],
-  "credits": []
+  "credits": [],
+  "cover": {
+    "src": "/media/p5js-physics/cover.webp",
+    "width": 800,
+    "height": 400,
+    "alt": "The p5.js runner prototype with a geometric player against a neon landscape.",
+    "caption": "The p5.js endless-runner prototype.",
+    "credit": "p5.js project material",
+    "permission": "approved"
+  }
 }
 ---
 

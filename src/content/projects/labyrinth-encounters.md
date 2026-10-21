@@ -39,7 +39,16 @@
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
     }
-  ]
+  ],
+  "cover": {
+    "src": "/media/labyrinth-encounters/cover.webp",
+    "width": 510,
+    "height": 473,
+    "alt": "Labyrinth Encounters title above a figure in a dark corridor.",
+    "caption": "Labyrinth Encounters cover artwork.",
+    "credit": "Labyrinth Encounters project artwork",
+    "permission": "approved"
+  }
 }
 ---
 

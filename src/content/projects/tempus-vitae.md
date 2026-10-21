@@ -2,13 +2,13 @@
 {
   "title": "Tempus Vitae",
   "shortDescription": "QA testing at Whiteboard Games for a science-fiction FPS metroidvania.",
-  "projectType": "collaboration",
-  "context": "external-collaboration",
+  "projectType": "professional-experience",
+  "context": "internship",
   "published": true,
   "sortOrder": 9,
   "featured": false,
   "roles": [
-    "QA Tester"
+    "QA Tester Intern"
   ],
   "technologies": [
     "Unity",

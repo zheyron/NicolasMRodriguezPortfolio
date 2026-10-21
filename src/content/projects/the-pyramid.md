@@ -24,7 +24,16 @@
       "reviewStatus": "approved"
     }
   ],
-  "credits": []
+  "credits": [],
+  "cover": {
+    "src": "/media/the-pyramid/cover.webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "A torch-lit stone passage inside The Pyramid.",
+    "caption": "An interior from The Pyramid.",
+    "credit": "The Pyramid project artwork",
+    "permission": "approved"
+  }
 }
 ---
 

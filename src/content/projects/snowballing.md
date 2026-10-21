@@ -226,7 +226,17 @@
       "kind": "mechanic",
       "title": "A choice at every level",
       "summary": "Prerequisites, upgrade limits, and a changing pool connect experience to the next decision.",
-      "linkedMechanicId": "snowballing-upgrade-choices"
+      "linkedMechanicId": "snowballing-upgrade-choices",
+      "media": {
+        "src": "/media/snowballing/level-up.webp",
+        "width": 640,
+        "height": 360,
+        "alt": "Three in-run upgrade cards: Ice Daggers, Sword Damage, and Sword Quickness.",
+        "caption": "At level-up, the player chooses one of three upgrades.",
+        "credit": "Snowballing project material",
+        "permission": "approved",
+        "pixelArt": true
+      }
     },
     {
       "id": "ownership",

@@ -52,7 +52,16 @@
       "reviewStatus": "approved"
     }
   ],
-  "credits": []
+  "credits": [],
+  "cover": {
+    "src": "/media/the-mechamorphosis/cover.webp",
+    "width": 315,
+    "height": 250,
+    "alt": "A hooded android against a futuristic city.",
+    "caption": "The Mechamorphosis character artwork.",
+    "credit": "The Mechamorphosis project artwork",
+    "permission": "approved"
+  }
 }
 ---
 

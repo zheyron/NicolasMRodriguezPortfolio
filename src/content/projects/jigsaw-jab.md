@@ -128,7 +128,16 @@
       "kind": "design",
       "title": "Two actions, one arena",
       "summary": "Poke, slam, and place: the same hand switches between combat and completing the board.",
-      "detailAnchor": "design-breakdown"
+      "detailAnchor": "design-breakdown",
+      "media": {
+        "src": "/media/jigsaw-jab/gameplay.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "The hand, enemies, and puzzle pieces share the Jigsaw Jab arena.",
+        "caption": "Combat and puzzle assembly share the same board.",
+        "credit": "Jigsaw Jab / Fuenteki — official Steam screenshot",
+        "permission": "approved"
+      }
     },
     {
       "id": "direction",

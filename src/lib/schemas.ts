@@ -31,7 +31,7 @@ function refine(data: {published:boolean;title?:string;shortDescription?:string;
   for(const d of data.breakdowns) for(const ref of d.evidenceIds) if(!ids.includes(ref)) ctx.addIssue({code:'custom',message:`Unknown evidence ID: ${ref}`,path:['breakdowns']});
 }
 export const projectSchema=z.object({ ...common,
-  projectType:z.enum(['game','modding','collaboration','experiment']).optional(), context:z.enum(['indie','academic','personal','external-collaboration']).optional(),
+  projectType:z.enum(['game','modding','collaboration','professional-experience','experiment']).optional(), context:z.enum(['indie','academic','personal','external-collaboration','internship']).optional(),
   productStatus:z.enum(['coming_soon','demo','prototype','in_development','released','published_mod']).optional(),
   technologies:z.array(z.string()).default([]), availability:z.string().optional(), team:z.string().optional(),
   tagline:z.string().optional(), summary:z.string().optional(),

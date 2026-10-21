@@ -24,7 +24,16 @@
       "lastVerifiedAt": "2026-10-21",
       "reviewStatus": "approved"
     }
-  ]
+  ],
+  "cover": {
+    "src": "/media/ceiba-spaciosa/cover.webp",
+    "width": 1280,
+    "height": 718,
+    "alt": "A statue illuminated by drifting embers in a dark environment.",
+    "caption": "An environment from Ceiba Spaciosa.",
+    "credit": "Ceiba Spaciosa project artwork",
+    "permission": "approved"
+  }
 }
 ---
 

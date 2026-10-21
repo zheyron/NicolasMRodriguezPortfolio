@@ -80,3 +80,18 @@ test('Jigsaw gameplay, compact chapter cards, contacts and QA credit',async({pag
  await expect(page.locator('footer').getByRole('link',{name:/LinkedIn/})).toHaveAttribute('href','https://www.linkedin.com/in/rodriguez-nic/');
  await page.goto('/work/tempus-vitae/');await expect(page.locator('main')).toContainText('December 2024 to March 2025');await expect(page.locator('main')).toContainText('Whiteboard Games');
 });
+
+test('Home projects have real covers and professional experience is distinct',async({page})=>{
+ await page.setViewportSize({width:1280,height:900});await page.goto('/');
+ await expect(page.locator('.hero-art')).not.toContainText('A little character');
+ await expect(page.locator('.hero-art')).not.toContainText('Meet Snowy');
+ await expect(page.locator('.type-cover')).toHaveCount(0);
+ for(const card of await page.locator('.project-card').all())await expect(card.locator('img')).toHaveCount(1);
+ const left=await page.locator('#jigsaw-jab .showcase-grid > .showcase-card').boundingBox();
+ const right=await page.locator('#jigsaw-jab .showcase-stack').boundingBox();
+ expect(Math.abs((left!.y+left!.height)-(right!.y+right!.height))).toBeLessThan(3);
+ await expect(page.locator('#jigsaw-jab .showcase-stack img')).toHaveCount(1);
+ await page.goto('/work/');await expect(page.locator('#professional-experience')).toContainText('Tempus Vitae');
+ await expect(page.locator('#collaboration')).not.toContainText('Tempus Vitae');
+ await page.goto('/work/tempus-vitae/');await expect(page.locator('main')).toContainText('Professional internship');
+});

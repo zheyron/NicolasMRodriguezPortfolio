@@ -394,3 +394,15 @@
 .steam-panel summary{cursor:pointer;font-weight:600}
 .showcase-stack{display:grid;gap:20px;align-content:start}.showcase-with-media .showcase-visual{grid-row:auto}
 @media(max-width:600px){.steam-panel [data-steam-widget]{display:none}}
+
+.more-games{margin-top:44px}.other-projects{grid-template-columns:repeat(2,minmax(0,1fr))}.showcase-stack .cover{aspect-ratio:2.4}.showcase-stack .cover img{object-fit:cover}.more-games .cover{background:var(--bg-alt)}
+@media(max-width:767px){.other-projects{grid-template-columns:1fr}.showcase-stack .cover{aspect-ratio:16/9}}
+@media(min-width:769px){
+  .showcase-with-media{align-items:stretch}
+  .showcase-stack{grid-template-rows:minmax(0,1fr) auto}
+  .showcase-stack .showcase-visual .cover{flex:1;aspect-ratio:auto;min-height:160px;position:relative}
+  .showcase-stack .showcase-visual .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+}
+.more-games .project-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.home-studies .mechanic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:767px){.more-games .project-grid,.home-studies .mechanic-grid{grid-template-columns:1fr}}
