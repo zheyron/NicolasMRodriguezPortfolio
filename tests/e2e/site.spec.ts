@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';import AxeBuilder from '@axe-core/playwright';
-const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/work/pillarfall/','/work/jigsaw-jab/','/work/tempus-vitae/','/mechanics/jigsaw-jab-combat-puzzle/','/404.html'];
+const routes=['/','/work/','/mechanics/','/about/','/contact/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-upgrade-choices/','/mechanics/snowballing-health-feedback/','/work/pillarfall/','/work/jigsaw-jab/','/work/tempus-vitae/','/mechanics/jigsaw-jab-combat-puzzle/','/work/gingaten/','/mechanics/gingaten-ai-overview/','/mechanics/gingaten-scavenger-mining/','/mechanics/gingaten-steering/','/404.html'];
 test('real media loads with correct dimensions and gallery links work',async({page})=>{
   for(const route of ['/','/work/snowballing/','/mechanics/snowballing-progression/','/mechanics/snowballing-health-feedback/']){
     await page.goto(route);
@@ -99,7 +99,7 @@ test('Home projects have real covers and professional experience is distinct',as
 test('Mechanics keeps images and studies under their own game',async({page})=>{
  await page.goto('/mechanics/');
  await expect(page.getByRole('navigation',{name:'Explore mechanics by game'})).toBeVisible();
- const expected={'jigsaw-jab':1,'snowballing':3,'gingaten':1};
+ const expected={'jigsaw-jab':1,'snowballing':3,'gingaten':3};
  for(const [id,count] of Object.entries(expected)){
   const group=page.locator(`.mechanics-project#${id}`);
   await expect(group.locator('.mechanic-card')).toHaveCount(count);
