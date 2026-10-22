@@ -5,6 +5,7 @@ const studies=[
  ['mechamorphosis-menu-audio','the-mechamorphosis'],
  ['duskheir-state-aware-world','duskheir'],
  ['duskheir-grass-feedback','duskheir'],
+ ['duskheir-player-backend','duskheir'],
  ['pillarfall-destructible-terrain','pillarfall'],
  ['p5js-movement-prototype','p5js-physics'],
 ] as const;
@@ -30,7 +31,7 @@ for(const [study,parent] of studies)test(`${study}: evidence, keyboard and acces
 });
 
 test('new clips load on request with reduced motion and pause offscreen',async({page})=>{
- for(const [slug,width] of [['duskheir-state-aware-world',1280],['duskheir-grass-feedback',1280],['p5js-movement-prototype',800]] as const){
+ for(const [slug,width] of [['duskheir-state-aware-world',1280],['duskheir-grass-feedback',1280],['duskheir-player-backend',1280],['p5js-movement-prototype',800]] as const){
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto(`/mechanics/${slug}/`);
   const video=page.locator('video');await video.scrollIntoViewIfNeeded();
   expect(await video.getAttribute('src')).toBeNull();
@@ -40,6 +41,20 @@ test('new clips load on request with reduced motion and pause offscreen',async({
   expect(await video.evaluate(v=>(v as HTMLVideoElement).muted)).toBe(true);
   await page.locator('.detail-end').scrollIntoViewIfNeeded();
   await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
+ }
+});
+
+test('player backend diagrams can be opened with the keyboard',async({page})=>{
+ await page.goto('/mechanics/duskheir-player-backend/');
+ await expect(page.getByRole('heading',{name:'Two meanings of “buffer”'})).toBeVisible();
+ const links=page.getByRole('link',{name:/^Open diagram:/});
+ await expect(links).toHaveCount(2);
+ for(let i=0;i<2;i++){
+  const href=await links.nth(i).getAttribute('href');
+  await links.nth(i).focus();await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(new RegExp(href!.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$'));
+  await expect(page.locator('svg')).toBeVisible();
+  await page.goBack();
  }
 });
 

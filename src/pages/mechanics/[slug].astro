@@ -5,6 +5,7 @@ import EvidenceList from '../../components/EvidenceList.astro';
 import VideoPoster from '../../components/VideoPoster.astro';
 import MechanicCard from '../../components/MechanicCard.astro';
 import MediaGallery from '../../components/MediaGallery.astro';
+import TechnicalDiagrams from '../../components/TechnicalDiagrams.astro';
 import MediaLoop from '../../components/MediaLoop.astro';
 import DecisionSummary from '../../components/DecisionSummary.astro';
 import Cover from '../../components/Cover.astro';
@@ -29,6 +30,7 @@ const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
   <div class="reading"><div class="prose"><Content/></div>{d.problem&&<section class="article-section"><h2>The design problem</h2><p>{d.problem}</p></section>}{d.intent&&<section class="article-section"><h2>What the system does</h2><p>{d.intent}</p></section>}</div>
   {d.flow.length>0&&<section class="system-flow-section" aria-label="How the system works"><p class="eyebrow">System flow</p><ol class="system-flow">{d.flow.map((step,i)=><li><span class="flow-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><h3>{step.label}</h3><p>{step.detail}</p></li>)}</ol></section>}
   <MediaGallery items={d.gallery} title="The system in play"/>
+  <TechnicalDiagrams items={d.diagrams}/>
   <div class="reading">
     {d.breakdowns.map(item=><DecisionSummary item={item}/>)}
     {d.alternatives.length>0&&<section class="article-section"><h2>Alternatives considered</h2>{d.alternatives.map(text=><p>{text}</p>)}</section>}

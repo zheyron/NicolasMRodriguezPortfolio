@@ -31,6 +31,7 @@ const common = {
   roles:z.array(z.string()).default([]), attribution:z.string().optional(), claims:z.array(claim).default([]),
   evidence:z.array(evidence).default([]), decisions:z.array(decision).default([]), cover:media.optional(),
   gallery:z.array(media).default([]),
+  diagrams:z.array(media).default([]),
   breakdowns:z.array(breakdown).default([]), loop:loop.optional(),
   video:z.object({ url:httpsUrl, label:z.string(), poster:media.optional() }).optional(),
   accent:z.enum(['mint','ice','sand','lilac','rose']).default('mint'),

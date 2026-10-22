@@ -1,0 +1,21 @@
+---
+import {withBase} from '../lib/paths';
+import type {CollectionEntry} from 'astro:content';
+interface Props {items:CollectionEntry<'mechanics'>['data']['diagrams'];}
+const {items=[]}=Astro.props;
+---
+{items.length>0&&<section class="technical-diagrams" aria-label="Technical diagrams">
+  <div class="section-heading"><h2>Inside the architecture</h2><p>Open a diagram to read it at full size.</p></div>
+  {items.map(item=><figure>
+    <a href={withBase(item.src,import.meta.env.BASE_URL)} aria-label={`Open diagram: ${item.alt}`}>
+      <img src={withBase(item.src,import.meta.env.BASE_URL)} width={item.width} height={item.height} alt={item.alt} loading="lazy" decoding="async"/>
+    </a>
+    <figcaption>{item.caption}</figcaption>
+  </figure>)}
+</section>}
+<style>
+  .technical-diagrams{margin-block:clamp(3rem,6vw,6rem)}
+  figure{margin:0 0 2rem;border:1px solid var(--border);border-radius:1.25rem;overflow:hidden;background:var(--surface)}
+  a{display:block}img{display:block;width:100%;height:auto}
+  figcaption{padding:1.25rem 1.5rem;max-width:80ch;line-height:1.65}
+</style>
