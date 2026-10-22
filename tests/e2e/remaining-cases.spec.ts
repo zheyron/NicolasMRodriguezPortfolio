@@ -6,6 +6,7 @@ const studies=[
  ['duskheir-state-aware-world','duskheir'],
  ['duskheir-grass-feedback','duskheir'],
  ['duskheir-player-backend','duskheir'],
+ ['duskheir-runtime-pooling','duskheir'],
  ['pillarfall-destructible-terrain','pillarfall'],
  ['p5js-movement-prototype','p5js-physics'],
 ] as const;
@@ -44,9 +45,9 @@ test('new clips load on request with reduced motion and pause offscreen',async({
  }
 });
 
-test('player backend diagrams can be opened with the keyboard',async({page})=>{
- await page.goto('/mechanics/duskheir-player-backend/');
- await expect(page.getByRole('heading',{name:'Two meanings of “buffer”'})).toBeVisible();
+for(const slug of ['duskheir-player-backend','duskheir-runtime-pooling'])test(`${slug}: diagrams can be opened with the keyboard`,async({page})=>{
+ await page.goto(`/mechanics/${slug}/`);
+ await expect(page.getByRole('heading',{name:'Inside the architecture'})).toBeVisible();
  const links=page.getByRole('link',{name:/^Open diagram:/});
  await expect(links).toHaveCount(2);
  for(let i=0;i<2;i++){
