@@ -27,7 +27,7 @@ const url=(p:string)=>withBase(p,import.meta.env.BASE_URL);
    s.video.addEventListener('pointerdown',()=>load(s.video),{once:true});
    s.video.addEventListener('keydown',()=>load(s.video),{once:true});
  });
- const observer=new IntersectionObserver(entries=>{for(const e of entries){const s=states.find(s=>s.root===e.target)!;s.visible=e.isIntersecting;if(s.visible&&allowed()&&!s.userPaused&&!document.hidden)void play(s.video);else s.video.pause();}},{threshold:0.2});
+ const observer=new IntersectionObserver(entries=>{for(const e of entries){const s=states.find(s=>s.root===e.target)!;s.visible=e.isIntersecting;if(!s.visible)s.video.pause();else if(allowed()&&!s.userPaused&&!document.hidden)void play(s.video);}},{threshold:0.2});
  states.forEach(s=>observer.observe(s.root));
  const preferences=()=>states.forEach(s=>{if(!allowed()||document.hidden)s.video.pause();else if(s.visible&&!s.userPaused)void play(s.video);});
  motion.addEventListener('change',preferences);connection?.addEventListener?.('change',preferences);document.addEventListener('visibilitychange',preferences);

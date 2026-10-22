@@ -30,7 +30,7 @@ for(const [study,parent] of studies)test(`${study}: evidence, keyboard and acces
 });
 
 test('new clips load on request with reduced motion and pause offscreen',async({page})=>{
- for(const [slug,width] of [['duskheir-state-aware-world',1280],['p5js-movement-prototype',800]] as const){
+ for(const [slug,width] of [['duskheir-state-aware-world',1280],['duskheir-grass-feedback',1280],['p5js-movement-prototype',800]] as const){
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto(`/mechanics/${slug}/`);
   const video=page.locator('video');await video.scrollIntoViewIfNeeded();
   expect(await video.getAttribute('src')).toBeNull();
